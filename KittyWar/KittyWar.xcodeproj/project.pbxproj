@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EBA113001DAEB21F00382798 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA112FF1DAEB21F00382798 /* AppDelegate.swift */; };
+		EBA113021DAEB21F00382798 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA113011DAEB21F00382798 /* ViewController.swift */; };
+		EBA113051DAEB21F00382798 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA113031DAEB21F00382798 /* Main.storyboard */; };
+		EBA113071DAEB21F00382798 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBA113061DAEB21F00382798 /* Assets.xcassets */; };
+		EBA1130A1DAEB21F00382798 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */; };
+		EBA113151DAEB21F00382798 /* KittyWarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA113141DAEB21F00382798 /* KittyWarTests.swift */; };
+		EBA113201DAEB21F00382798 /* KittyWarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EBA113111DAEB21F00382798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBA112F41DAEB21E00382798 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EBA112FB1DAEB21E00382798;
+			remoteInfo = KittyWar;
+		};
+		EBA1131C1DAEB21F00382798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBA112F41DAEB21E00382798 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EBA112FB1DAEB21E00382798;
+			remoteInfo = KittyWar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EBA112FC1DAEB21F00382798 /* KittyWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KittyWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA112FF1DAEB21F00382798 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EBA113011DAEB21F00382798 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EBA113041DAEB21F00382798 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EBA113061DAEB21F00382798 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EBA113091DAEB21F00382798 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EBA1130B1DAEB21F00382798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBA113101DAEB21F00382798 /* KittyWarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KittyWarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA113141DAEB21F00382798 /* KittyWarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittyWarTests.swift; sourceTree = "<group>"; };
+		EBA113161DAEB21F00382798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBA1131B1DAEB21F00382798 /* KittyWarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KittyWarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittyWarUITests.swift; sourceTree = "<group>"; };
+		EBA113211DAEB21F00382798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EBA112F91DAEB21E00382798 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA1130D1DAEB21F00382798 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA113181DAEB21F00382798 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EBA112F31DAEB21E00382798 = {
+			isa = PBXGroup;
+			children = (
+				EBA112FE1DAEB21F00382798 /* KittyWar */,
+				EBA113131DAEB21F00382798 /* KittyWarTests */,
+				EBA1131E1DAEB21F00382798 /* KittyWarUITests */,
+				EBA112FD1DAEB21F00382798 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EBA112FD1DAEB21F00382798 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EBA112FC1DAEB21F00382798 /* KittyWar.app */,
+				EBA113101DAEB21F00382798 /* KittyWarTests.xctest */,
+				EBA1131B1DAEB21F00382798 /* KittyWarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EBA112FE1DAEB21F00382798 /* KittyWar */ = {
+			isa = PBXGroup;
+			children = (
+				EBA112FF1DAEB21F00382798 /* AppDelegate.swift */,
+				EBA113011DAEB21F00382798 /* ViewController.swift */,
+				EBA113031DAEB21F00382798 /* Main.storyboard */,
+				EBA113061DAEB21F00382798 /* Assets.xcassets */,
+				EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */,
+				EBA1130B1DAEB21F00382798 /* Info.plist */,
+			);
+			path = KittyWar;
+			sourceTree = "<group>";
+		};
+		EBA113131DAEB21F00382798 /* KittyWarTests */ = {
+			isa = PBXGroup;
+			children = (
+				EBA113141DAEB21F00382798 /* KittyWarTests.swift */,
+				EBA113161DAEB21F00382798 /* Info.plist */,
+			);
+			path = KittyWarTests;
+			sourceTree = "<group>";
+		};
+		EBA1131E1DAEB21F00382798 /* KittyWarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */,
+				EBA113211DAEB21F00382798 /* Info.plist */,
+			);
+			path = KittyWarUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EBA112FB1DAEB21E00382798 /* KittyWar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBA113241DAEB21F00382798 /* Build configuration list for PBXNativeTarget "KittyWar" */;
+			buildPhases = (
+				EBA112F81DAEB21E00382798 /* Sources */,
+				EBA112F91DAEB21E00382798 /* Frameworks */,
+				EBA112FA1DAEB21E00382798 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KittyWar;
+			productName = KittyWar;
+			productReference = EBA112FC1DAEB21F00382798 /* KittyWar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EBA1130F1DAEB21F00382798 /* KittyWarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBA113271DAEB21F00382798 /* Build configuration list for PBXNativeTarget "KittyWarTests" */;
+			buildPhases = (
+				EBA1130C1DAEB21F00382798 /* Sources */,
+				EBA1130D1DAEB21F00382798 /* Frameworks */,
+				EBA1130E1DAEB21F00382798 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EBA113121DAEB21F00382798 /* PBXTargetDependency */,
+			);
+			name = KittyWarTests;
+			productName = KittyWarTests;
+			productReference = EBA113101DAEB21F00382798 /* KittyWarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EBA1131A1DAEB21F00382798 /* KittyWarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBA1132A1DAEB21F00382798 /* Build configuration list for PBXNativeTarget "KittyWarUITests" */;
+			buildPhases = (
+				EBA113171DAEB21F00382798 /* Sources */,
+				EBA113181DAEB21F00382798 /* Frameworks */,
+				EBA113191DAEB21F00382798 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EBA1131D1DAEB21F00382798 /* PBXTargetDependency */,
+			);
+			name = KittyWarUITests;
+			productName = KittyWarUITests;
+			productReference = EBA1131B1DAEB21F00382798 /* KittyWarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EBA112F41DAEB21E00382798 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = DeiSu;
+				TargetAttributes = {
+					EBA112FB1DAEB21E00382798 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					EBA1130F1DAEB21F00382798 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EBA112FB1DAEB21E00382798;
+					};
+					EBA1131A1DAEB21F00382798 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EBA112FB1DAEB21E00382798;
+					};
+				};
+			};
+			buildConfigurationList = EBA112F71DAEB21E00382798 /* Build configuration list for PBXProject "KittyWar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EBA112F31DAEB21E00382798;
+			productRefGroup = EBA112FD1DAEB21F00382798 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EBA112FB1DAEB21E00382798 /* KittyWar */,
+				EBA1130F1DAEB21F00382798 /* KittyWarTests */,
+				EBA1131A1DAEB21F00382798 /* KittyWarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EBA112FA1DAEB21E00382798 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA1130A1DAEB21F00382798 /* LaunchScreen.storyboard in Resources */,
+				EBA113071DAEB21F00382798 /* Assets.xcassets in Resources */,
+				EBA113051DAEB21F00382798 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA1130E1DAEB21F00382798 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA113191DAEB21F00382798 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EBA112F81DAEB21E00382798 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA113021DAEB21F00382798 /* ViewController.swift in Sources */,
+				EBA113001DAEB21F00382798 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA1130C1DAEB21F00382798 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA113151DAEB21F00382798 /* KittyWarTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA113171DAEB21F00382798 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA113201DAEB21F00382798 /* KittyWarUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EBA113121DAEB21F00382798 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EBA112FB1DAEB21E00382798 /* KittyWar */;
+			targetProxy = EBA113111DAEB21F00382798 /* PBXContainerItemProxy */;
+		};
+		EBA1131D1DAEB21F00382798 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EBA112FB1DAEB21E00382798 /* KittyWar */;
+			targetProxy = EBA1131C1DAEB21F00382798 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EBA113031DAEB21F00382798 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EBA113041DAEB21F00382798 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EBA113091DAEB21F00382798 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EBA113221DAEB21F00382798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EBA113231DAEB21F00382798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EBA113251DAEB21F00382798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KittyWar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brucedsu.deisu.KittyWar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		EBA113261DAEB21F00382798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KittyWar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brucedsu.deisu.KittyWar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		EBA113281DAEB21F00382798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = KittyWarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brucedsu.deisu.KittyWarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KittyWar.app/KittyWar";
+			};
+			name = Debug;
+		};
+		EBA113291DAEB21F00382798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = KittyWarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brucedsu.deisu.KittyWarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KittyWar.app/KittyWar";
+			};
+			name = Release;
+		};
+		EBA1132B1DAEB21F00382798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = KittyWarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brucedsu.deisu.KittyWarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = KittyWar;
+			};
+			name = Debug;
+		};
+		EBA1132C1DAEB21F00382798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = KittyWarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brucedsu.deisu.KittyWarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = KittyWar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EBA112F71DAEB21E00382798 /* Build configuration list for PBXProject "KittyWar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBA113221DAEB21F00382798 /* Debug */,
+				EBA113231DAEB21F00382798 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EBA113241DAEB21F00382798 /* Build configuration list for PBXNativeTarget "KittyWar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBA113251DAEB21F00382798 /* Debug */,
+				EBA113261DAEB21F00382798 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EBA113271DAEB21F00382798 /* Build configuration list for PBXNativeTarget "KittyWarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBA113281DAEB21F00382798 /* Debug */,
+				EBA113291DAEB21F00382798 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EBA1132A1DAEB21F00382798 /* Build configuration list for PBXNativeTarget "KittyWarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBA1132B1DAEB21F00382798 /* Debug */,
+				EBA1132C1DAEB21F00382798 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EBA112F41DAEB21E00382798 /* Project object */;
+}
