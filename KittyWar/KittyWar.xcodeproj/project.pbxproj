@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB14C2FB1DB81FAF00389FA5 /* KWRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14C2FA1DB81FAF00389FA5 /* KWRequest.swift */; };
 		EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */; };
 		EB7B7A731DB57433002529CE /* KWRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A721DB57433002529CE /* KWRegisterVC.swift */; };
 		EB7B7A751DB5743E002529CE /* KWLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A741DB5743E002529CE /* KWLoginVC.swift */; };
@@ -19,6 +18,7 @@
 		EBA1130A1DAEB21F00382798 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */; };
 		EBA113151DAEB21F00382798 /* KittyWarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA113141DAEB21F00382798 /* KittyWarTests.swift */; };
 		EBA113201DAEB21F00382798 /* KittyWarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */; };
+		EBB5D8391DB98F27003638C6 /* KWRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB5D8381DB98F27003638C6 /* KWRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EB14C2FA1DB81FAF00389FA5 /* KWRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWRequest.swift; sourceTree = "<group>"; };
 		EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWWelcomeVC.swift; sourceTree = "<group>"; };
 		EB7B7A721DB57433002529CE /* KWRegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWRegisterVC.swift; sourceTree = "<group>"; };
 		EB7B7A741DB5743E002529CE /* KWLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWLoginVC.swift; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		EBA1131B1DAEB21F00382798 /* KittyWarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KittyWarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittyWarUITests.swift; sourceTree = "<group>"; };
 		EBA113211DAEB21F00382798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBB5D8381DB98F27003638C6 /* KWRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +110,7 @@
 				EBA113031DAEB21F00382798 /* Main.storyboard */,
 				EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */,
 				EB7B7A721DB57433002529CE /* KWRegisterVC.swift */,
+				EBB5D8381DB98F27003638C6 /* KWRequest.swift */,
 				EB7B7A741DB5743E002529CE /* KWLoginVC.swift */,
 				EB7B7A761DB58513002529CE /* KWPlayVC.swift */,
 				EB7B7A781DB58527002529CE /* KWProfileVC.swift */,
@@ -117,7 +118,6 @@
 				EBA113061DAEB21F00382798 /* Assets.xcassets */,
 				EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */,
 				EBA1130B1DAEB21F00382798 /* Info.plist */,
-				EB14C2FA1DB81FAF00389FA5 /* KWRequest.swift */,
 			);
 			path = KittyWar;
 			sourceTree = "<group>";
@@ -277,7 +277,7 @@
 				EB7B7A771DB58513002529CE /* KWPlayVC.swift in Sources */,
 				EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */,
 				EB7B7A791DB58527002529CE /* KWProfileVC.swift in Sources */,
-				EB14C2FB1DB81FAF00389FA5 /* KWRequest.swift in Sources */,
+				EBB5D8391DB98F27003638C6 /* KWRequest.swift in Sources */,
 				EB7B7A731DB57433002529CE /* KWRegisterVC.swift in Sources */,
 				EBA113001DAEB21F00382798 /* AppDelegate.swift in Sources */,
 				EB7B7A751DB5743E002529CE /* KWLoginVC.swift in Sources */,

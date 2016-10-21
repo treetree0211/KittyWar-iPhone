@@ -2,30 +2,19 @@
 //  KWRequest.swift
 //  KittyWar
 //
-//  Created by Hejia Su on 10/19/16.
+//  Created by Hejia Su on 10/20/16.
 //  Copyright © 2016 DeiSu. All rights reserved.
 //
 
-import UIKit
-
-enum RequestMethod {
-    case post
+struct RequestURLString {
+    static let register = "http://www.brucedsu.com/kittywar/register/mobile/"
 }
 
-class KWRequest: NSObject {
-    
-    // generic request method returns an optional dictionary which contains
-    // the json response from the server
-    private static func executeRequest(requestURL: NSURL,
-                                       requestMethod: RequestMethod,
-                                       requestBodu: String) -> [String:AnyObject]? {
-        return nil
-    }
-    
-    static func registerNewAccount(username: String,
-                                   password: String,
-                                   email: String) -> Void {
-        
-    }
-    
+struct RequestFormatString {
+    static let register = "username=%s&password=%s&email=%s"
+}
+
+struct StatusCode {
+    static let usernameIsTaken = 409
+    static let registerSuccess = 201
 }
