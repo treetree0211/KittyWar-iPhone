@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SocketIO
 
 class KWLoginVC: UIViewController {
 
@@ -21,7 +22,17 @@ class KWLoginVC: UIViewController {
                                 username, password)
         
         // connect to server via socket
-        
+        let socket = SocketIOClient(socketURL: URL(string: RequestURLString.login)!)
+        socket.on(loginString) { (data, ask) in
+            // save username and password if success
+            if (true) {
+                let defaults = UserDefaults.standard
+                defaults.set(username, forKey: "username")
+                defaults.set(password, forKey: "password")
+                defaults.set(true, forKey: "login")
+            }
+        }
+        socket.connect()
     }
     
 }

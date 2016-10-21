@@ -6,9 +6,11 @@
 //  Copyright © 2016 DeiSu. All rights reserved.
 //
 
+import Foundation
+
 struct RequestURLString {
     static let register = "http://www.brucedsu.com/kittywar/register/mobile/"
-    static let login = "http://www.brucedsu.com/kittywar:8080"
+    static let login = "http://www.brucedsu.com/kittywar:2056"
 }
 
 struct RequestFormatString {
@@ -23,4 +25,8 @@ struct StatusCode {
 
 struct ResponseKey {
     static let status = "status"
+}
+
+class KWNetwork: NSObject {
+    
 }
