@@ -11,18 +11,30 @@ import UIKit
 class KWRegisterVC: UIViewController {
     
     @IBOutlet private weak var usernameTextField: UITextField!
-    @IBOutlet private weak var passwordTextField: UITextField!
-    @IBOutlet private weak var confirmPasswordTextField: UITextField!
     @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var reenterEmailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    
+    private lazy var alertController = { () -> UIAlertController in
+        let alertController = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        return alertController
+    }()
+    
+    private func showAlert(title: String, message: String) {
+        alertController.title = title
+        alertController.message = message
+        present(alertController, animated: true, completion: nil)
+    }
     
     // check whether the two passwords are the same
-    private func passwordAndConfirmedPasswordAreSame() -> Bool {
-        return passwordTextField.text == confirmPasswordTextField.text
+    private func twoEmailsAreSame() -> Bool {
+        return emailTextField.text == reenterEmailTextField.text
     }
     
     @IBAction func register(_ sender: UIButton) {
-        if !passwordAndConfirmedPasswordAreSame() {
-            print("Two passwords are not the same!")
+        if !twoEmailsAreSame() {
+            showAlert(title: "Email Error", message: "Two emails don't match")
             return
         }
         
@@ -41,7 +53,8 @@ class KWRegisterVC: UIViewController {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             // check error first
             if error != nil {
-                print("Request error: \(error)")
+                self.showAlert(title: "Request Error",
+                               message: error!.localizedDescription)
             } else {
                 do {
                     let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
@@ -49,18 +62,23 @@ class KWRegisterVC: UIViewController {
                     if let status = parsedData[ResponseKey.status] as? Int {
                         switch status  {
                         case StatusCode.usernameIsTaken:
-                            print("Username is taken")
+                            self.showAlert(title: "Register Error",
+                                           message: "Username is taken")
                         case StatusCode.registerSuccess:
-                            print("Register success")
+                            self.showAlert(title: "Register Success",
+                                           message: "Register Success")
+                            
                             // save username and password locally
                             
                             // connect to the server through a socket
                         default:
-                            print("Register error")
+                            self.showAlert(title: "Register error",
+                                           message: "")
                         }
                     }
                 } catch let error as NSError {
-                    print("Parsing Error: \(error)")
+                    self.showAlert(title: "Parsing Error",
+                                   message: error.localizedDescription)
                 }
             }
         }.resume()
