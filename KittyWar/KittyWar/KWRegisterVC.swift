@@ -43,22 +43,26 @@ class KWRegisterVC: UIViewController {
             if error != nil {
                 print("Request error: \(error)")
             } else {
-                // check status code
-                if let httpResponse = response as? HTTPURLResponse {
-                    switch httpResponse.statusCode {
-                    case StatusCode.usernameIsTaken:
-                        print("Username is taken")
-                    case StatusCode.registerSuccess:
-                        print("Register success")
-                        // save username and password locally
-                        
-                        // connect to the server through a socket
-                    default:
-                        print("Register error")
+                do {
+                    let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
+                    
+                    if let status = parsedData[ResponseKey.status] as? Int {
+                        switch status  {
+                        case StatusCode.usernameIsTaken:
+                            print("Username is taken")
+                        case StatusCode.registerSuccess:
+                            print("Register success")
+                            // save username and password locally
+                            
+                            // connect to the server through a socket
+                        default:
+                            print("Register error")
+                        }
                     }
+                } catch let error as NSError {
+                    print("Parsing Error: \(error)")
                 }
             }
         }.resume()
     }
-    
 }

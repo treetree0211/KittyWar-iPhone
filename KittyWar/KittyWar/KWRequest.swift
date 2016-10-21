@@ -18,3 +18,7 @@ struct StatusCode {
     static let usernameIsTaken = 409
     static let registerSuccess = 201
 }
+
+struct ResponseKey {
+    static let status = "status"
+}
