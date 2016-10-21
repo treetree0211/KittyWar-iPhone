@@ -9,13 +9,18 @@
 import UIKit
 
 class KWLoginVC: UIViewController {
-    
-    
 
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet private weak var usernameTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
     
     @IBAction func login(_ sender: UIButton) {
+        // create login string
+        let username = usernameTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let loginString = String(format: RequestFormatString.login,
+                                username, password)
+        
+        // connect to server via socket
         
     }
     

@@ -39,10 +39,11 @@ class KWRegisterVC: UIViewController {
         }
         
         // create body string
+        let username = usernameTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let email = emailTextField.text ?? ""
         let bodyString = String(format: RequestFormatString.register,
-                                usernameTextField.text!,
-                                passwordTextField.text!,
-                                emailTextField.text!)
+                                username, password, email)
         
         // create url request
         var request = URLRequest(url: URL(string: RequestURLString.register)!)
@@ -67,10 +68,6 @@ class KWRegisterVC: UIViewController {
                         case StatusCode.registerSuccess:
                             self.showAlert(title: "Register Success",
                                            message: "Register Success")
-                            
-                            // save username and password locally
-                            
-                            // connect to the server through a socket
                         default:
                             self.showAlert(title: "Register error",
                                            message: "")
