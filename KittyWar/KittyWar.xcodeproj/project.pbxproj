@@ -61,7 +61,7 @@
 		EBA1131B1DAEB21F00382798 /* KittyWarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KittyWarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittyWarUITests.swift; sourceTree = "<group>"; };
 		EBA113211DAEB21F00382798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBA8AE511DB9F216001EF8D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		EBA8AE511DB9F216001EF8D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EBB5D8381DB98F27003638C6 /* KWNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

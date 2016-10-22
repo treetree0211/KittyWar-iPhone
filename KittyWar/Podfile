@@ -2,5 +2,5 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'KittyWar' do
-    pod 'Socket.IO-Client-Swift', '~> 8.0.2'
+    pod 'Starscream', '~> 2.0.0'
 end
