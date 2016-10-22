@@ -40,10 +40,10 @@ class KWRegisterVC: UIViewController {
         
         // register to notification center
         let nc = NotificationCenter.default
-        nc.addObserver(forName: registerResultNotification,
-                       object: nil,
-                       queue: nil,
-                       using: handleRegisterResult)
+        nc.addObserver(self,
+                       selector: #selector(KWRegisterVC.handleRegisterResult(notification:)),
+                       name: registerResultNotification,
+                       object: nil)
         
         // let network singleton register
         let username = usernameTextField.text ?? ""
@@ -52,9 +52,9 @@ class KWRegisterVC: UIViewController {
         KWNetwork.shared.register(username: username, email: email, password: password)
     }
     
-    func handleRegisterResult(notification: Notification) -> Void {
-        if let status = notification.userInfo?[InfoKey.status] as? RegisterResult {
-            switch status {
+    func handleRegisterResult(notification: Notification) {
+        if let result = notification.userInfo?[InfoKey.result] as? RegisterResult {
+            switch result {
             case .usernameIsTaken:
                 self.showAlert(title: "Register Error",
                                message: "Username is taken")

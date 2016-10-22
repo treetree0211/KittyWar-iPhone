@@ -19,9 +19,25 @@ class KWLoginVC: UIViewController {
         let password = passwordTextField.text ?? ""
         
         // register to notification center
+        let nc = NotificationCenter.default
+        nc.addObserver(self,
+                       selector: #selector(KWLoginVC.handleLoginResult(notification:)),
+                       name: loginResultNotification,
+                       object: nil)
         
         // login
         KWNetwork.shared.login(username: username, password: password)
+    }
+    
+    func handleLoginResult(notification: Notification) {
+        if let result = notification.userInfo?[InfoKey.result] as? LoginResult {
+            switch result {
+            case .success:
+                break
+            case .error:
+                break
+            }
+        }
     }
     
 }
