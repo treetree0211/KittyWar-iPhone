@@ -20,6 +20,8 @@
 		EBA113201DAEB21F00382798 /* KittyWarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1131F1DAEB21F00382798 /* KittyWarUITests.swift */; };
 		EBA8AE521DB9F216001EF8D5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = EBA8AE511DB9F216001EF8D5 /* Podfile */; };
 		EBB5D8391DB98F27003638C6 /* KWNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB5D8381DB98F27003638C6 /* KWNetwork.swift */; };
+		EBBC746B1DCC55BF00D45173 /* KWAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBC746A1DCC55BF00D45173 /* KWAlertVC.swift */; };
+		EBBC746D1DCC59D300D45173 /* KWUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBC746C1DCC59D300D45173 /* KWUserDefaults.swift */; };
 		F29A77464C7E73BB488908BE /* Pods_KittyWar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4620044F9D96FA734CB5010 /* Pods_KittyWar.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		EBA113211DAEB21F00382798 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBA8AE511DB9F216001EF8D5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EBB5D8381DB98F27003638C6 /* KWNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWNetwork.swift; sourceTree = "<group>"; };
+		EBBC746A1DCC55BF00D45173 /* KWAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWAlertVC.swift; sourceTree = "<group>"; };
+		EBBC746C1DCC59D300D45173 /* KWUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,12 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				EBA113031DAEB21F00382798 /* Main.storyboard */,
+				EBBC74691DCC558700D45173 /* ViewControllers */,
 				EBB5D8381DB98F27003638C6 /* KWNetwork.swift */,
-				EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */,
-				EB7B7A721DB57433002529CE /* KWRegisterVC.swift */,
-				EB7B7A741DB5743E002529CE /* KWLoginVC.swift */,
-				EB7B7A761DB58513002529CE /* KWPlayVC.swift */,
-				EB7B7A781DB58527002529CE /* KWProfileVC.swift */,
+				EBBC746C1DCC59D300D45173 /* KWUserDefaults.swift */,
 				EBA112FF1DAEB21F00382798 /* AppDelegate.swift */,
 				EBA113061DAEB21F00382798 /* Assets.xcassets */,
 				EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */,
@@ -165,6 +166,19 @@
 				EBA113211DAEB21F00382798 /* Info.plist */,
 			);
 			path = KittyWarUITests;
+			sourceTree = "<group>";
+		};
+		EBBC74691DCC558700D45173 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */,
+				EBBC746A1DCC55BF00D45173 /* KWAlertVC.swift */,
+				EB7B7A721DB57433002529CE /* KWRegisterVC.swift */,
+				EB7B7A741DB5743E002529CE /* KWLoginVC.swift */,
+				EB7B7A761DB58513002529CE /* KWPlayVC.swift */,
+				EB7B7A781DB58527002529CE /* KWProfileVC.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,9 +369,11 @@
 			files = (
 				EB7B7A771DB58513002529CE /* KWPlayVC.swift in Sources */,
 				EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */,
+				EBBC746D1DCC59D300D45173 /* KWUserDefaults.swift in Sources */,
 				EB7B7A791DB58527002529CE /* KWProfileVC.swift in Sources */,
 				EBB5D8391DB98F27003638C6 /* KWNetwork.swift in Sources */,
 				EB7B7A731DB57433002529CE /* KWRegisterVC.swift in Sources */,
+				EBBC746B1DCC55BF00D45173 /* KWAlertVC.swift in Sources */,
 				EBA113001DAEB21F00382798 /* AppDelegate.swift in Sources */,
 				EB7B7A751DB5743E002529CE /* KWLoginVC.swift in Sources */,
 			);

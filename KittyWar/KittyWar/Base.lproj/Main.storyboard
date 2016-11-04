@@ -83,6 +83,7 @@
                     <connections>
                         <outlet property="passwordTextField" destination="j76-aL-11j" id="x9J-rZ-q8U"/>
                         <outlet property="usernameTextField" destination="PSJ-Wf-Y1M" id="Gnz-l5-ZSn"/>
+                        <segue destination="F0c-7o-5Kq" kind="presentation" identifier="loginToGameTabBarController" id="hCm-kE-sx7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BO2-7B-f85" userLabel="First Responder" sceneMemberID="firstResponder"/>

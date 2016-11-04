@@ -197,6 +197,16 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         }.resume()
     }
     
+    func findGame(token: String) {
+        // if not connected, connect first
+        if !socket.isConnected {
+            socket.connect()
+        }
+        
+        // TODO: update this to use server API
+        socket.write(string: "Find Game")
+    }
+    
     // MARK: WebSocketDelete
     
     func websocketDidConnect(socket: WebSocket) {

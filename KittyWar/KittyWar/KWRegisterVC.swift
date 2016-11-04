@@ -8,24 +8,12 @@
 
 import UIKit
 
-class KWRegisterVC: UIViewController {
+class KWRegisterVC: KWAlertVC {
     
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var reenterEmailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
-    
-    private lazy var alertController = { () -> UIAlertController in
-        let alertController = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        return alertController
-    }()
-    
-    private func showAlert(title: String, message: String) {
-        alertController.title = title
-        alertController.message = message
-        present(alertController, animated: true, completion: nil)
-    }
     
     // check whether the two passwords are the same
     private func twoEmailsAreSame() -> Bool {
@@ -56,14 +44,17 @@ class KWRegisterVC: UIViewController {
         if let result = notification.userInfo?[InfoKey.result] as? RegisterResult {
             switch result {
             case .usernameIsTaken:
-                self.showAlert(title: "Register Error",
+                showAlert(title: "Register Error",
                                message: "Username is taken")
+                break
             case .success:
-                self.showAlert(title: "Register Success",
+                showAlert(title: "Register Success",
                                message: "Register Success")
+                break
             case .fail:
-                self.showAlert(title: "Register Error",
+                showAlert(title: "Register Error",
                                message: "Registore Error")
+                break
             }
         }
     }
