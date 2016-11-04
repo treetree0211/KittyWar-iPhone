@@ -61,7 +61,7 @@ class KWRegisterVC: UIViewController {
             case .success:
                 self.showAlert(title: "Register Success",
                                message: "Register Success")
-            case .error:
+            case .fail:
                 self.showAlert(title: "Register Error",
                                message: "Registore Error")
             }
