@@ -31,14 +31,19 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     
     // MARK: Constants
     
+    private struct BaseURL {
+        static let local = "http://127.0.0.1:8000/"
+        static let remote = "http://www.bruce.com:8000/"
+    }
+
     private struct RequestURL {
-        static let register = URL(string: "http://www.brucedsu.com/kittywar/register/mobile/")
-        static let login = URL(string: "http://www.brucedsu.com/kittywar:2056")
+        static let register = "kittywar/register/mobile/"
+        static let login = "kittywar/login/mobile/"
     }
     
     private struct RequestFormat {
-        static let register = "username=%s&password=%s&email=%s"
-        static let login = "username%s&password=%s"
+        static let register = "username=%@&password=%@&email=%@"
+        static let login = "username%@&password=%@"
     }
     
     private struct StatusCode {
@@ -52,8 +57,11 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
 
     // MARK: Properties
     
+    // whether server is running on a local machine
+    private static let serverIsRunningLocally = true
+    
     private lazy var socket: WebSocket = {
-        let s = WebSocket(url: RequestURL.login!)
+        let s = WebSocket(url: URL(string: KWNetwork.getBaseURL() + RequestURL.login)!)
         return s
     }()
     
@@ -61,6 +69,12 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         let network = KWNetwork()
         return network
     }()
+    
+    // MARK: Helper
+    
+    private static func getBaseURL() -> String {
+        return KWNetwork.serverIsRunningLocally ? BaseURL.local : BaseURL.remote
+    }
     
     // MARK: Initialization
     
@@ -71,14 +85,18 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     // MARK: Register & Login
     
     func register(username: String, email: String, password: String) {
-        // create body string
-        let bodyString = String(format: RequestFormat.register,
-                                username, password, email)
-        
-        // create url request
-        var request = URLRequest(url: RequestURL.register!)
+        // create request
+        var request = URLRequest(url: URL(string: KWNetwork.getBaseURL() + RequestURL.register)!)
         request.httpMethod = "POST"
-        request.httpBody = bodyString.data(using: .utf8)
+        
+        // json data
+        let jsonDictionary = ["username": username, "password": password, "email": email]
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: jsonDictionary,
+                                                          options: .prettyPrinted)
+        } catch let error as NSError {
+            print("JSON error: \(error)")
+        }
         
         // start the session
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -87,11 +105,11 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
                 print("Request error: \(error)")
             } else {
                 do {
-                    let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
+                    let nc = NotificationCenter.default
+                    let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String: Any]
+                    let status = (parsedData[ResponseKey.status] as! NSString).integerValue
                     
-                    if let status = parsedData[ResponseKey.status] as? Int {
-                        let nc = NotificationCenter.default
-                        
+                    DispatchQueue.main.async {  // go back to main thread
                         switch status  {
                         case StatusCode.usernameIsTaken:
                             nc.post(name: registerResultNotification,
@@ -115,6 +133,22 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     }
     
     func login(username: String, password: String) {
+        // create request
+        var request = URLRequest(url: URL(string: KWNetwork.getBaseURL() + RequestURL.login)!)
+        request.httpMethod = "POST"
+        
+        // json data
+        let jsonDictionary = ["username": username, "password": password]
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: jsonDictionary,
+                                                          options: .prettyPrinted)
+        } catch let error as NSError {
+            print("JSON error: \(error)")
+        }
+
+        
+        
+        
         // set delegates
         socket.delegate = self
         socket.pongDelegate = self
