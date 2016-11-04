@@ -12,12 +12,12 @@ import Starscream
 enum RegisterResult {
     case usernameIsTaken
     case success
-    case error
+    case fail
 }
 
 enum LoginResult {
     case success
-    case error
+    case fail
 }
 
 let registerResultNotification = Notification.Name("registerResultNotification")
@@ -25,6 +25,7 @@ let loginResultNotification = Notification.Name("loginResultNotification")
 
 struct InfoKey {
     static let result = "result"
+    static let token = "token"
 }
 
 class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
@@ -47,12 +48,18 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     }
     
     private struct StatusCode {
+        // register
         static let usernameIsTaken = 409
         static let registerSuccess = 201
+        
+        // login
+        static let loginSuccess = 200
+        static let loginFail = 400
     }
     
     private struct ResponseKey {
         static let status = "status"
+        static let token = "token"
     }
 
     // MARK: Properties
@@ -62,6 +69,14 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     
     private lazy var socket: WebSocket = {
         let s = WebSocket(url: URL(string: KWNetwork.getBaseURL() + RequestURL.login)!)
+        
+        // set delegates
+        s.delegate = self
+        s.pongDelegate = self
+        
+        // connect
+        s.connect()
+        
         return s
     }()
     
@@ -122,7 +137,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
                         default:
                             nc.post(name: registerResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: RegisterResult.error])
+                                    userInfo: [InfoKey.result: RegisterResult.fail])
                         }
                     }
                 } catch let error as NSError {
@@ -146,19 +161,40 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
             print("JSON error: \(error)")
         }
 
-        
-        
-        
-        // set delegates
-        socket.delegate = self
-        socket.pongDelegate = self
-        
-        // connect
-        socket.connect()
-        
-        // send login message
-        let loginString = String(format: RequestFormat.login, username, password)
-        socket.write(data: loginString.data(using: .utf8)!)
+        // start the session
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            // check error first
+            if error != nil {
+                print("Request error: \(error)")
+            } else {
+                do {
+                    let parsedData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String: Any]
+                    let status = (parsedData[ResponseKey.status] as! NSString).integerValue
+                    let token: String? = parsedData[ResponseKey.token] as? String
+                    
+                    DispatchQueue.main.async {  // go back to main thread
+                        let nc = NotificationCenter.default
+                        
+                        switch status  {
+                        case StatusCode.loginSuccess:
+                            nc.post(name: loginResultNotification,
+                                    object: nil,
+                                    userInfo: [InfoKey.result: LoginResult.success, InfoKey.token: token!])
+                        case StatusCode.loginFail:
+                            nc.post(name: loginResultNotification,
+                                    object: nil,
+                                    userInfo: [InfoKey.result: LoginResult.fail])
+                        default:
+                            nc.post(name: loginResultNotification,
+                                    object: nil,
+                                    userInfo: [InfoKey.result: LoginResult.fail])
+                        }
+                    }
+                } catch let error as NSError {
+                    print("Parsing error: \(error)")
+                }
+            }
+        }.resume()
     }
     
     // MARK: WebSocketDelete

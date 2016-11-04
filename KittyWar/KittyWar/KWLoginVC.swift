@@ -34,7 +34,7 @@ class KWLoginVC: UIViewController {
             switch result {
             case .success:
                 break
-            case .error:
+            case .fail:
                 break
             }
         }
