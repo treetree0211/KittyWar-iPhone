@@ -172,8 +172,6 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
                     let status = (parsedData[ResponseKey.status] as! NSString).integerValue
                     let token: String? = parsedData[ResponseKey.token] as? String
                     
-                    print("JAJA \(status)")
-                    
                     DispatchQueue.main.async {  // go back to main thread
                         let nc = NotificationCenter.default
                        

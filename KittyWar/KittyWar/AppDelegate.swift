@@ -13,11 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    private struct StoryBoard {
-        static let welcomeNavController = "Welcome Nav Controller"
-        static let gameTabBarController = "Game Tab Bar Controller"
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
