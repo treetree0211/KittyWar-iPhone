@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aqS-dT-Vgg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F0c-7o-5Kq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -83,43 +83,11 @@
                     <connections>
                         <outlet property="passwordTextField" destination="j76-aL-11j" id="x9J-rZ-q8U"/>
                         <outlet property="usernameTextField" destination="PSJ-Wf-Y1M" id="Gnz-l5-ZSn"/>
-                        <segue destination="F0c-7o-5Kq" kind="presentation" identifier="loginToGameTabBarController" id="hCm-kE-sx7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BO2-7B-f85" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2791.1999999999998" y="8.5457271364317844"/>
-        </scene>
-        <!--Profile-->
-        <scene sceneID="AGL-qd-vgd">
-            <objects>
-                <viewController id="xni-9F-tQE" customClass="KWProfileVC" customModule="KittyWar" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1PC-N5-dak"/>
-                        <viewControllerLayoutGuide type="bottom" id="lY1-N6-Sq3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pCg-Kb-lCG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DeiSu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMD-Sy-TaU">
-                                <frame key="frameInset" minX="16" minY="28" width="46" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="h9O-vf-ZrF"/>
-                    <connections>
-                        <outlet property="usernameLabel" destination="gMD-Sy-TaU" id="euk-3k-9Lk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C1V-12-yhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4767" y="-17"/>
         </scene>
         <!--Play-->
         <scene sceneID="Xaz-uN-C6a">
@@ -141,7 +109,7 @@
                                     <action selector="findGame:" destination="56F-6n-Cuj" eventType="touchUpInside" id="CAA-pg-366"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sXR-c6-DUh">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sXR-c6-DUh">
                                 <frame key="frameInset" minX="169" minY="299" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -149,7 +117,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Play" id="Vsm-bP-uuq"/>
+                    <tabBarItem key="tabBarItem" title="Play" image="Play" id="Vsm-bP-uuq"/>
                     <connections>
                         <outlet property="findGameIndicator" destination="sXR-c6-DUh" id="mau-tD-Faa"/>
                     </connections>
@@ -169,12 +137,61 @@
                     </tabBar>
                     <connections>
                         <segue destination="56F-6n-Cuj" kind="relationship" relationship="viewControllers" id="51p-AX-gVW"/>
-                        <segue destination="xni-9F-tQE" kind="relationship" relationship="viewControllers" id="khv-C9-vs8"/>
+                        <segue destination="BPW-pv-ZMz" kind="relationship" relationship="viewControllers" id="fGW-mT-Tpb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rja-5E-pql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3812" y="-345"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="2Rz-Mi-IEn">
+            <objects>
+                <tableViewController id="BPW-pv-ZMz" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="D64-A2-qQt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="mwb-Ln-uey">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VdD-Gh-Aq8">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VdD-Gh-Aq8" id="g9I-20-Pvt">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="uiE-h1-1Wn">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uiE-h1-1Wn" id="x0b-KN-KqG">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xYx-Ml-SKQ">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xYx-Ml-SKQ" id="rGz-sF-UfM">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="BPW-pv-ZMz" id="Yg0-7a-8LJ"/>
+                            <outlet property="delegate" destination="BPW-pv-ZMz" id="kKy-Dt-sSi"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile" id="ERe-dW-0Xc"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bnr-zi-TtL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4770" y="19"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="KCC-DB-e03">
@@ -258,4 +275,8 @@
             <point key="canvasLocation" x="1092" y="-534.78260869565224"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Play" width="30" height="30"/>
+        <image name="Profile" width="23" height="30"/>
+    </resources>
 </document>

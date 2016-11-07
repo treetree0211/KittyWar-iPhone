@@ -15,9 +15,9 @@ class KWLoginVC: KWAlertVC {
     @IBOutlet private weak var passwordTextField: UITextField!
     
     private struct StoryBoard {
-        static let segueToGameTabBarController = "loginToGameTabBarController"
+        
     }
-    
+        
     @IBAction func login(_ sender: UIButton) {
         let username = usernameTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -37,16 +37,14 @@ class KWLoginVC: KWAlertVC {
         if let result = notification.userInfo?[InfoKey.result] as? LoginResult {
             switch result {
             case .success:
-                // alert success
-                showAlert(title: "Login Success",
-                          message: "Register Success")
+                print("Login Success")
                 
                 // save token locally
                 UserDefaults.standard.set(notification.userInfo?[InfoKey.token] as! String,
                                           forKey: KWUserDefaultsKey.token)
                 
-                // segue to game play tab bar controller
-                performSegue(withIdentifier: StoryBoard.segueToGameTabBarController, sender: self)
+                // dismiss the login navigation controller
+                navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 break
             case .fail:
                 // alert fail
