@@ -10,6 +10,15 @@ import UIKit
 import Starscream
 
 class KWLoginVC: KWAlertVC {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // add background img
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
+        
+        // Do any additional setup after loading the view.
+    }
+
 
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
