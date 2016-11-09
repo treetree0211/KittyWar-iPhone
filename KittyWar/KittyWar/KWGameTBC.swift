@@ -17,8 +17,8 @@ class KWGameTBC: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let token = UserDefaults.standard.object(forKey: KWUserDefaultsKey.token) {
-            print("token = \(token)")
+        if let _ = UserDefaults.standard.object(forKey: KWUserDefaultsKey.token) {
+            // print("token = \(token)")
         } else {
             // token doesn't exist
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

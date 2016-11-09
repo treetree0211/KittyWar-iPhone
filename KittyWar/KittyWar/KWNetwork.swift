@@ -39,9 +39,14 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     
     // MARK: - Constants
     
-    private struct BaseURL {
+    private struct WebServerBaseURL {
         static let local = "http://127.0.0.1:8000/"
         static let remote = "http://www.bruce.com:8000/"
+    }
+    
+    private struct GameServerURL {
+        static let local = "http://127.0.0.1:2056/"
+        static let remote = "http://www.bruce.com:2056/"
     }
 
     private struct RequestURL {
@@ -78,16 +83,21 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     // MARK: - Properties
     
     // whether server is running on a local machine
-    private static let serverIsRunningLocally = true
+    private static let serversAreRunningLocally = true
     
     private lazy var socket: WebSocket = {
-        let s = WebSocket(url: URL(string: "http://127.0.0.1:2056")!)
+        let socket = WebSocket(url: URL(string: KWNetwork.getGameServerURL())!)
         
         // set delegates
-        s.delegate = self
-        s.pongDelegate = self
+        socket.delegate = self
+        socket.pongDelegate = self
         
-        return s
+        // set header
+//        socket.headers["Sec-WebSocket-Protocol"] = ""
+//        socket.headers["Sec-WebSocket-Version"] = ""
+//        socket.headers["My-Awesome-Header"] = ""
+        
+        return socket
     }()
     
     static let shared: KWNetwork = {
@@ -95,10 +105,14 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         return network
     }()
     
-    // MARK: - Helper
+    // MARK: - Get Web Server/ Game Server (Base) URL
     
-    private static func getBaseURL() -> String {
-        return KWNetwork.serverIsRunningLocally ? BaseURL.local : BaseURL.remote
+    private static func getWebServerBaseURL() -> String {
+        return KWNetwork.serversAreRunningLocally ? WebServerBaseURL.local : WebServerBaseURL.remote
+    }
+    
+    private static func getGameServerURL() -> String {
+        return KWNetwork.serversAreRunningLocally ? GameServerURL.local : GameServerURL.remote
     }
     
     // MARK: - Initialization
@@ -111,7 +125,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     
     func register(username: String, email: String, password: String) {
         // create request
-        var request = URLRequest(url: URL(string: KWNetwork.getBaseURL() + RequestURL.register)!)
+        var request = URLRequest(url: URL(string: KWNetwork.getWebServerBaseURL() + RequestURL.register)!)
         request.httpMethod = "POST"
         
         // json data
@@ -159,7 +173,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     
     func login(username: String, password: String) {
         // create request
-        var request = URLRequest(url: URL(string: KWNetwork.getBaseURL() + RequestURL.login)!)
+        var request = URLRequest(url: URL(string: KWNetwork.getWebServerBaseURL() + RequestURL.login)!)
         request.httpMethod = "POST"
         
         // json data
@@ -222,7 +236,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         
         // append size of data
         let sizeByteArray = DSConvertor.intToByteArray(number: sizeOfData)
-        result += sizeByteArray.suffix(3)
+        result += sizeByteArray.suffix(3)  // last three bytes
         
         return result
     }
@@ -236,20 +250,24 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         // connect
         socket.connect()
         
-        // create login data
-        let username = KWUserDefaults.getUsername()
-        var bytes = getMessagePrefix(flag: GameServerFlag.login, sizeOfData: username.characters.count)
-        bytes += DSConvertor.stringToBytes(string: username)
-        let loginData = Data(bytes: bytes)
-        
-        print("jaja usernmae = \(username)")
-        print("jaja \(loginData.count)")
-        
-        // send login data
-        socket.write(data: loginData)
+        if (socket.isConnected) {
+            print("Connection is successful")
+            
+            // create login data
+            let username = KWUserDefaults.getUsername()
+            var bytes = getMessagePrefix(flag: GameServerFlag.login, sizeOfData: username.characters.count)
+            bytes += DSConvertor.stringToBytes(string: username)
+            let loginData = Data(bytes: bytes)
+            
+            // send login data
+            socket.write(data: loginData)
+
+        } else {
+            print("Connection is failure")
+        }
     }
     
-    func findGame(token: String) {
+    func findMatch(token: String) {
         connectToGameServer()
         
         // TODO: update this to use server API

@@ -10,21 +10,24 @@ import UIKit
 
 class KWPlayVC: UIViewController {
 
-    @IBOutlet weak var findGameIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var findMatchIndicator: UIActivityIndicatorView!
     
-    @IBAction func findGame(_ sender: UIButton) {
+    @IBAction func findMatch(_ sender: UIButton) {
         // register to notification center
         let nc = NotificationCenter.default
         nc.addObserver(self,
-                       selector: #selector(KWPlayVC.handleFindGameResult(notification:)),
+                       selector: #selector(KWPlayVC.handleFindMatchResult(notification:)),
                        name: findGameResultNotification,
                        object: nil)
         
+        // find match indicator start animation
+        findMatchIndicator.startAnimating()
+        
         // find game
-        KWNetwork.shared.findGame(token: KWUserDefaults.getToken())
+        KWNetwork.shared.findMatch(token: KWUserDefaults.getToken())
     }
     
-    func handleFindGameResult(notification: Notification) {
+    func handleFindMatchResult(notification: Notification) {
         
     }
     

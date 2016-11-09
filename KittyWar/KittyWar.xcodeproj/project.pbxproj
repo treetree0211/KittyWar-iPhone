@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		30AA55E21DD2715F00E79CB7 /* KWKittyCategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA55E11DD2715F00E79CB7 /* KWKittyCategoryTVC.swift */; };
 		30AA55E41DD2743900E79CB7 /* KWChanceCardTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA55E31DD2743900E79CB7 /* KWChanceCardTVC.swift */; };
+		EB0DEB871DD31EE700E4AB21 /* KWGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0DEB861DD31EE700E4AB21 /* KWGameVC.swift */; };
 		EB1111E41DD13F6D008200D7 /* KWGameTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1111E31DD13F6D008200D7 /* KWGameTBC.swift */; };
 		EB1111E71DD2674B008200D7 /* DSConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1111E61DD2674B008200D7 /* DSConvertor.swift */; };
 		EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */; };
@@ -52,6 +53,7 @@
 		4125F5EE8EDD6CACBD01F73D /* Pods-KittyWar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KittyWar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KittyWar/Pods-KittyWar.debug.xcconfig"; sourceTree = "<group>"; };
 		47685E297D7A9E03D031AEB0 /* Pods-KittyWar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KittyWar.release.xcconfig"; path = "Pods/Target Support Files/Pods-KittyWar/Pods-KittyWar.release.xcconfig"; sourceTree = "<group>"; };
 		E4620044F9D96FA734CB5010 /* Pods_KittyWar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KittyWar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0DEB861DD31EE700E4AB21 /* KWGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWGameVC.swift; sourceTree = "<group>"; };
 		EB1111E31DD13F6D008200D7 /* KWGameTBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWGameTBC.swift; sourceTree = "<group>"; };
 		EB1111E61DD2674B008200D7 /* DSConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSConvertor.swift; sourceTree = "<group>"; };
 		EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWWelcomeVC.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				EB7B7A781DB58527002529CE /* KWProfileTVC.swift */,
 				30AA55E11DD2715F00E79CB7 /* KWKittyCategoryTVC.swift */,
 				30AA55E31DD2743900E79CB7 /* KWChanceCardTVC.swift */,
+				EB0DEB861DD31EE700E4AB21 /* KWGameVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				30AA55E21DD2715F00E79CB7 /* KWKittyCategoryTVC.swift in Sources */,
 				EBA113001DAEB21F00382798 /* AppDelegate.swift in Sources */,
 				EB7B7A751DB5743E002529CE /* KWLoginVC.swift in Sources */,
+				EB0DEB871DD31EE700E4AB21 /* KWGameVC.swift in Sources */,
 				EB1111E41DD13F6D008200D7 /* KWGameTBC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
