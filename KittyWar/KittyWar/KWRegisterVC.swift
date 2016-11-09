@@ -10,6 +10,15 @@ import UIKit
 
 class KWRegisterVC: KWAlertVC {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // add background img
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
+        
+        // Do any additional setup after loading the view.
+    }
+
+    
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var reenterEmailTextField: UITextField!

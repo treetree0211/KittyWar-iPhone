@@ -12,6 +12,8 @@ class KWWelcomeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // add background img
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
 
         // Do any additional setup after loading the view.
     }
