@@ -15,7 +15,7 @@
 		EB7B7A731DB57433002529CE /* KWRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A721DB57433002529CE /* KWRegisterVC.swift */; };
 		EB7B7A751DB5743E002529CE /* KWLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A741DB5743E002529CE /* KWLoginVC.swift */; };
 		EB7B7A771DB58513002529CE /* KWPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A761DB58513002529CE /* KWPlayVC.swift */; };
-		EB7B7A791DB58527002529CE /* KWProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A781DB58527002529CE /* KWProfileVC.swift */; };
+		EB7B7A791DB58527002529CE /* KWProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A781DB58527002529CE /* KWProfileTVC.swift */; };
 		EBA113001DAEB21F00382798 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA112FF1DAEB21F00382798 /* AppDelegate.swift */; };
 		EBA113051DAEB21F00382798 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA113031DAEB21F00382798 /* Main.storyboard */; };
 		EBA113071DAEB21F00382798 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBA113061DAEB21F00382798 /* Assets.xcassets */; };
@@ -58,7 +58,7 @@
 		EB7B7A721DB57433002529CE /* KWRegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWRegisterVC.swift; sourceTree = "<group>"; };
 		EB7B7A741DB5743E002529CE /* KWLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWLoginVC.swift; sourceTree = "<group>"; };
 		EB7B7A761DB58513002529CE /* KWPlayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWPlayVC.swift; sourceTree = "<group>"; };
-		EB7B7A781DB58527002529CE /* KWProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWProfileVC.swift; sourceTree = "<group>"; };
+		EB7B7A781DB58527002529CE /* KWProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWProfileTVC.swift; sourceTree = "<group>"; };
 		EBA112FC1DAEB21F00382798 /* KittyWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KittyWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBA112FF1DAEB21F00382798 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBA113041DAEB21F00382798 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 				EB7B7A721DB57433002529CE /* KWRegisterVC.swift */,
 				EB7B7A741DB5743E002529CE /* KWLoginVC.swift */,
 				EB7B7A761DB58513002529CE /* KWPlayVC.swift */,
-				EB7B7A781DB58527002529CE /* KWProfileVC.swift */,
+				EB7B7A781DB58527002529CE /* KWProfileTVC.swift */,
 				30AA55E11DD2715F00E79CB7 /* KWKittyCategoryTVC.swift */,
 				30AA55E31DD2743900E79CB7 /* KWChanceCardTVC.swift */,
 			);
@@ -383,7 +383,7 @@
 				EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */,
 				EB1111E71DD2674B008200D7 /* DSConvertor.swift in Sources */,
 				EBBC746D1DCC59D300D45173 /* KWUserDefaults.swift in Sources */,
-				EB7B7A791DB58527002529CE /* KWProfileVC.swift in Sources */,
+				EB7B7A791DB58527002529CE /* KWProfileTVC.swift in Sources */,
 				EBB5D8391DB98F27003638C6 /* KWNetwork.swift in Sources */,
 				EB7B7A731DB57433002529CE /* KWRegisterVC.swift in Sources */,
 				EBBC746B1DCC55BF00D45173 /* KWAlertVC.swift in Sources */,
