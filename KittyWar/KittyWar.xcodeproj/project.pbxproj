@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB1111E41DD13F6D008200D7 /* KWGameTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1111E31DD13F6D008200D7 /* KWGameTBC.swift */; };
+		EB1111E71DD2674B008200D7 /* DSConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1111E61DD2674B008200D7 /* DSConvertor.swift */; };
 		EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */; };
 		EB7B7A731DB57433002529CE /* KWRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A721DB57433002529CE /* KWRegisterVC.swift */; };
 		EB7B7A751DB5743E002529CE /* KWLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B7A741DB5743E002529CE /* KWLoginVC.swift */; };
@@ -48,6 +49,7 @@
 		47685E297D7A9E03D031AEB0 /* Pods-KittyWar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KittyWar.release.xcconfig"; path = "Pods/Target Support Files/Pods-KittyWar/Pods-KittyWar.release.xcconfig"; sourceTree = "<group>"; };
 		E4620044F9D96FA734CB5010 /* Pods_KittyWar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KittyWar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1111E31DD13F6D008200D7 /* KWGameTBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWGameTBC.swift; sourceTree = "<group>"; };
+		EB1111E61DD2674B008200D7 /* DSConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSConvertor.swift; sourceTree = "<group>"; };
 		EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWWelcomeVC.swift; sourceTree = "<group>"; };
 		EB7B7A721DB57433002529CE /* KWRegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWRegisterVC.swift; sourceTree = "<group>"; };
 		EB7B7A741DB5743E002529CE /* KWLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWLoginVC.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				EBA113061DAEB21F00382798 /* Assets.xcassets */,
 				EBA113081DAEB21F00382798 /* LaunchScreen.storyboard */,
 				EBA1130B1DAEB21F00382798 /* Info.plist */,
+				EB1111E61DD2674B008200D7 /* DSConvertor.swift */,
 			);
 			path = KittyWar;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			files = (
 				EB7B7A771DB58513002529CE /* KWPlayVC.swift in Sources */,
 				EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */,
+				EB1111E71DD2674B008200D7 /* DSConvertor.swift in Sources */,
 				EBBC746D1DCC59D300D45173 /* KWUserDefaults.swift in Sources */,
 				EB7B7A791DB58527002529CE /* KWProfileVC.swift in Sources */,
 				EBB5D8391DB98F27003638C6 /* KWNetwork.swift in Sources */,
