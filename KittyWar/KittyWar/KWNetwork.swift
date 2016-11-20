@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Starscream
+import SwiftSocket
 
 enum RegisterResult {
     case usernameIsTaken
@@ -35,20 +35,19 @@ struct InfoKey {
     static let username = "username"
 }
 
-class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
+class KWNetwork: NSObject {
     
     // MARK: - Constants
+    
+    private struct HTTPRequestMethod {
+        static let post = "POST"
+    }
     
     private struct WebServerBaseURL {
         static let local = "http://127.0.0.1:8000/"
         static let remote = "http://www.bruce.com:8000/"
     }
     
-    private struct GameServerURL {
-        static let local = "http://127.0.0.1:2056/"
-        static let remote = "http://www.bruce.com:2056/"
-    }
-
     private struct RequestURL {
         static let register = "kittywar/register/mobile/"
         static let login = "kittywar/login/mobile/"
@@ -74,10 +73,22 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         static let token = "token"
     }
     
+    private struct GameServerURL {
+        static let local = "127.0.0.1"
+        static let remote = "www.bruce.com"
+        static let port: Int32 = 2056
+    }
+    
     private struct GameServerFlag {
         static let login: UInt8 = 0
         static let logout: UInt8 = 1
         static let findMatch: UInt8 = 2
+        static let userProfile: UInt8 = 3
+        static let allCards: UInt8 = 4
+        static let catCards: UInt8 = 5
+        static let basicCards: UInt8 = 6
+        static let chanceCards: UInt8 = 7
+        static let abilityCards: UInt8 = 8
     }
 
     // MARK: - Properties
@@ -85,20 +96,13 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     // whether server is running on a local machine
     private static let serversAreRunningLocally = true
     
-    private lazy var socket: WebSocket = {
-        let socket = WebSocket(url: URL(string: KWNetwork.getGameServerURL())!)
-        
-        // set delegates
-        socket.delegate = self
-        socket.pongDelegate = self
-        
-        // set header
-//        socket.headers["Sec-WebSocket-Protocol"] = ""
-//        socket.headers["Sec-WebSocket-Version"] = ""
-//        socket.headers["My-Awesome-Header"] = ""
-        
-        return socket
+    private lazy var client: TCPClient = {
+        let client = TCPClient(address: KWNetwork.getGameServerURL(),
+                               port: GameServerURL.port)
+        return client
     }()
+    
+    private var isConnectedToGameServer = false
     
     static let shared: KWNetwork = {
         let network = KWNetwork()
@@ -126,7 +130,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     func register(username: String, email: String, password: String) {
         // create request
         var request = URLRequest(url: URL(string: KWNetwork.getWebServerBaseURL() + RequestURL.register)!)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPRequestMethod.post
         
         // json data
         let jsonDictionary = ["username": username, "password": password, "email": email]
@@ -174,7 +178,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     func login(username: String, password: String) {
         // create request
         var request = URLRequest(url: URL(string: KWNetwork.getWebServerBaseURL() + RequestURL.login)!)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPRequestMethod.post
         
         // json data
         let jsonDictionary = ["username": username, "password": password]
@@ -241,61 +245,54 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         return result
     }
     
-    private func connectToGameServer() {
-        if socket.isConnected {
-            print("Web socket is connected")
-            return
+    // return true if connected to the game server, otherwise return false
+    private func connectToGameServer() -> Bool {
+        if isConnectedToGameServer {
+            return true
         }
         
-        // connect
-        socket.connect()
-        
-        if (socket.isConnected) {
-            print("Connection is successful")
-            
-            // create login data
-            let username = KWUserDefaults.getUsername()
-            var bytes = getMessagePrefix(flag: GameServerFlag.login, sizeOfData: username.characters.count)
-            bytes += DSConvertor.stringToBytes(string: username)
-            let loginData = Data(bytes: bytes)
-            
-            // send login data
-            socket.write(data: loginData)
+        // create login data
+        let username = KWUserDefaults.getUsername()
+        var bytes = getMessagePrefix(flag: GameServerFlag.login, sizeOfData: username.characters.count)
+        bytes += DSConvertor.stringToBytes(string: username)
+        let loginData = Data(bytes: bytes)
 
-        } else {
-            print("Connection is failure")
+        switch client.connect(timeout: 10) {
+        case .success:
+            switch client.send(data: loginData) {
+            case .success:
+                guard let data = client.read(1024 * 10) else {
+                    return false
+                }
+                
+                // check returned data
+                if data[3] == 1 && data[4] == 1 {  // success
+                    isConnectedToGameServer = true
+                    print("Connection to game server success!")
+                    return true
+                } else {  // failure
+                    isConnectedToGameServer = false
+                    print("Connection to game server failed!")
+                    return false
+                }
+            case .failure (let error):
+                print("Authentication failed, error \(error)")
+            }
+        case .failure (let error):
+            print("Connection to game server failed, error: \(error)")
+            return false
         }
+        
+        return false
     }
     
     func findMatch(token: String) {
-        connectToGameServer()
+        if !connectToGameServer() {
+            return
+        }
         
         // TODO: update this to use server API
         // socket.write(string: "Find Game")
-    }
-    
-    // MARK: - WebSocketDelegate
-    
-    func websocketDidConnect(socket: WebSocket) {
-        print("Websocket is connected")
-    }
-    
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("Websocket is disconnected: \(error?.localizedDescription)")
-    }
-    
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("Got some text: \(text)")
-    }
-    
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
-        print("Got some data: \(data.count)")
-    }
-    
-    // MARK: - WebSocketPongDelegate
-    
-    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
-        print("Got pong! Maybe some data: \(data?.count)")
     }
     
 }
