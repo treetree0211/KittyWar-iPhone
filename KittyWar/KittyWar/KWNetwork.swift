@@ -12,22 +12,22 @@ import SwiftSocket
 enum RegisterResult {
     case usernameIsTaken
     case success
-    case fail
+    case failure
 }
 
 enum LoginResult {
     case success
-    case fail
+    case failure
 }
 
-enum FindGameResult {
+enum FindMatchResult {
     case success
-    case fail
+    case failure
 }
 
 let registerResultNotification = Notification.Name("registerResultNotification")
 let loginResultNotification = Notification.Name("loginResultNotification")
-let findGameResultNotification = Notification.Name("findGameResultNotification")
+let findMatchResultNotification = Notification.Name("findMatchResultNotification")
 
 struct InfoKey {
     static let result = "result"
@@ -165,7 +165,7 @@ class KWNetwork: NSObject {
                         default:
                             nc.post(name: registerResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: RegisterResult.fail])
+                                    userInfo: [InfoKey.result: RegisterResult.failure])
                         }
                     }
                 } catch let error as NSError {
@@ -211,11 +211,11 @@ class KWNetwork: NSObject {
                         case StatusCode.loginFail:
                             nc.post(name: loginResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: LoginResult.fail])
+                                    userInfo: [InfoKey.result: LoginResult.failure])
                         default:
                             nc.post(name: loginResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: LoginResult.fail])
+                                    userInfo: [InfoKey.result: LoginResult.failure])
                         }
                     }
                 } catch let error as NSError {
@@ -223,6 +223,46 @@ class KWNetwork: NSObject {
                 }
             }
         }.resume()
+    }
+    
+    // MARK: - Parse Game Server Response
+    
+    enum  BodyType {
+        case int
+        case string
+        case json
+    }
+    
+    private func parseGameServerResponse(response: [UInt8], bodyType: BodyType) -> (flag: UInt8, sizeOfBody: Int, bodyString: String?, bodyInt: Int?) {
+        print("Response: \(response)")
+        
+        // process flag
+        let flag: UInt8 = response[0]
+        print("Response flag: \(flag)")
+            
+        // data size
+        var sizeBytes = response[1...3]
+        sizeBytes = [0, 0, 0, 0, 0] + sizeBytes
+        let data = Data(bytes: sizeBytes)
+        let sizeOfBody = Int(bigEndian: data.withUnsafeBytes { $0.pointee })
+        print("Response body size: \(sizeOfBody)")
+        
+        var bodyString: String? = nil
+        var bodyInt: Int? = nil
+        
+        // TODO: update this
+        // process body
+        switch bodyType {
+        case .int:
+            bodyInt = Int(response[4])
+            print("Response body int: \(bodyInt)")
+        case .string:
+            bodyString = nil
+        default:
+            break
+        }
+        
+        return (flag, sizeOfBody, bodyString, bodyInt)
     }
     
     // MARK: - Game Server
@@ -253,7 +293,8 @@ class KWNetwork: NSObject {
         
         // create login data
         let username = KWUserDefaults.getUsername()
-        var bytes = getMessagePrefix(flag: GameServerFlag.login, sizeOfData: username.characters.count)
+        var bytes = getMessagePrefix(flag: GameServerFlag.login,
+                                     sizeOfData: username.characters.count)
         bytes += DSConvertor.stringToBytes(string: username)
         let loginData = Data(bytes: bytes)
 
@@ -261,12 +302,16 @@ class KWNetwork: NSObject {
         case .success:
             switch client.send(data: loginData) {
             case .success:
-                guard let data = client.read(1024 * 10) else {
+                guard let response = client.read(1024 * 10) else {
                     return false
                 }
                 
-                // check returned data
-                if data[3] == 1 && data[4] == 1 {  // success
+                // parse response
+                let (flag, sizeOfBody, _, bodyInt) =
+                    parseGameServerResponse(response: response, bodyType: .int)
+                
+                // check response
+                if flag == GameServerFlag.login && sizeOfBody == 1 && bodyInt == 1 {  // success
                     isConnectedToGameServer = true
                     print("Connection to game server success!")
                     return true
@@ -286,13 +331,42 @@ class KWNetwork: NSObject {
         return false
     }
     
-    func findMatch(token: String) {
+    func findMatch() {
         if !connectToGameServer() {
             return
         }
         
-        // TODO: update this to use server API
-        // socket.write(string: "Find Game")
+        let bytes = getMessagePrefix(flag: GameServerFlag.findMatch,
+                                     sizeOfData: 0)
+        let findMatchData = Data(bytes: bytes)
+        
+        DispatchQueue(label: "Network Queue").async {
+            switch self.client.send(data: findMatchData) {
+            case .success:
+                guard let response = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    // parse response
+                    let (flag, sizeOfBody, _, _) =
+                        self.parseGameServerResponse(response: response, bodyType: .int)
+                    
+                    // check response
+                    if flag == GameServerFlag.findMatch && sizeOfBody == 0 {  // successfully found a match
+                        print("Successfully found a match!")
+                        
+                        let nc = NotificationCenter.default
+                        nc.post(name: findMatchResultNotification,
+                                object: nil,
+                                userInfo: [InfoKey.result: FindMatchResult.success])
+                    }
+
+                }
+            case .failure (let error):
+                print("Send data failed, error: \(error)")
+            }
+        }
     }
     
 }

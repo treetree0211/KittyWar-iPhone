@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F0c-7o-5Kq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F0c-7o-5Kq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -92,7 +92,7 @@
         <!--Play-->
         <scene sceneID="Xaz-uN-C6a">
             <objects>
-                <viewController id="56F-6n-Cuj" customClass="KWPlayVC" customModule="KittyWar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="56F-6n-Cuj" customClass="KWFindMatchVC" customModule="KittyWar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gxO-dj-24d"/>
                         <viewControllerLayoutGuide type="bottom" id="kt2-VF-by8"/>
@@ -111,7 +111,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Find Match"/>
                                 <connections>
-                                    <action selector="findMatch:" destination="56F-6n-Cuj" eventType="touchUpInside" id="4hA-SU-F5U"/>
+                                    <action selector="findMatch:" destination="56F-6n-Cuj" eventType="touchUpInside" id="COV-5g-LXC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -119,8 +119,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Play" image="Play" id="Vsm-bP-uuq"/>
                     <connections>
-                        <outlet property="findMatchIndicator" destination="sXR-c6-DUh" id="2ld-Cw-0Zf"/>
-                        <segue destination="OGq-kh-nKK" kind="presentation" id="pik-bR-HbU"/>
+                        <outlet property="findMatchIndicator" destination="sXR-c6-DUh" id="713-ne-oTf"/>
+                        <segue destination="OGq-kh-nKK" kind="presentation" identifier="Game View Controller Segue" id="pik-bR-HbU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gcI-1i-J3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -263,7 +263,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Kitty Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZhC-u6-2tK">
-                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -283,7 +283,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Chance Card Gallery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CqJ-Uu-aac">
-                                                    <frame key="frameInset" minX="15" width="345" height="41"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="41.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -321,11 +321,11 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="175"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sx5-Te-Kfo" id="BF4-ga-aLl">
-                                    <frame key="frameInset" width="375" height="174"/>
+                                    <frame key="frameInset" width="375" height="174.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iJJ-Gl-1Wh">
-                                            <frame key="frameInset" minX="15" width="345" height="174"/>
+                                            <frame key="frameInset" minX="15" width="345" height="174.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -358,11 +358,11 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="134"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="chS-3H-Q6g" id="Web-xR-j62">
-                                    <frame key="frameInset" width="375" height="133"/>
+                                    <frame key="frameInset" width="375" height="133.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5fL-5B-Gsv">
-                                            <frame key="frameInset" minX="15" width="345" height="133"/>
+                                            <frame key="frameInset" minX="15" width="345" height="133.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

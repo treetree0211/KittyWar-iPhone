@@ -59,7 +59,7 @@ class KWLoginVC: KWAlertVC {
                 // dismiss the login navigation controller
                 navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 break
-            case .fail:
+            case .failure:
                 // alert fail
                 showAlert(title: "Login Fail",
                           message: "Username or password is wrong")
