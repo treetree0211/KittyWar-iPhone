@@ -19,7 +19,11 @@ class KWKittyCategoryTVC: UITableViewController {
     }
     
     
+    
     var cats = ["Abyssinian Cat", "Exotic Shorthair Cat", "Maine Coon Cat", "Persian Cat", "Ragdoll Cat", "Siamese Cat"]
+    
+    var kittyName: String?
+    var kittyInfo: String?
     
     // MARK: -Table view data source
     
@@ -46,8 +50,26 @@ class KWKittyCategoryTVC: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Kitty Category"
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showKitty"{
+            let vc = segue.destination as! KWKittyVC
+            //vc.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPath(for: cell)
+                if let index = indexPath?.row {
+                    kittyName = cats[index]
+                    vc.kittyName = kittyName!
+                    print(kittyName!)
+                }
+            }
+        }
     }
+    
+    func myVCDidFinish(controller: KWKittyVC, text: String) {
+    }
+    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Kitty Category"
+//    }
 
 }

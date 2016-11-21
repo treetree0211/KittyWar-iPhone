@@ -47,9 +47,9 @@ class KWChanceTVC: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Chance Card Gallery"
-    }
+    
+    
+    
 
   
 }
