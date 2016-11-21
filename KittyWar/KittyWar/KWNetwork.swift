@@ -7,36 +7,47 @@
 //
 
 import Foundation
-import Starscream
+import SwiftSocket
 
 enum RegisterResult {
     case usernameIsTaken
     case success
-    case fail
+    case failure
 }
 
 enum LoginResult {
     case success
-    case fail
+    case failure
+}
+
+enum FindMatchResult {
+    case success
+    case failure
 }
 
 let registerResultNotification = Notification.Name("registerResultNotification")
 let loginResultNotification = Notification.Name("loginResultNotification")
+let findMatchResultNotification = Notification.Name("findMatchResultNotification")
 
 struct InfoKey {
     static let result = "result"
     static let token = "token"
+    static let username = "username"
 }
 
-class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
+class KWNetwork: NSObject {
     
-    // MARK: Constants
+    // MARK: - Constants
     
-    private struct BaseURL {
+    private struct HTTPRequestMethod {
+        static let post = "POST"
+    }
+    
+    private struct WebServerBaseURL {
         static let local = "http://127.0.0.1:8000/"
         static let remote = "http://www.bruce.com:8000/"
     }
-
+    
     private struct RequestURL {
         static let register = "kittywar/register/mobile/"
         static let login = "kittywar/login/mobile/"
@@ -61,48 +72,65 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         static let status = "status"
         static let token = "token"
     }
+    
+    private struct GameServerURL {
+        static let local = "127.0.0.1"
+        static let remote = "www.bruce.com"
+        static let port: Int32 = 2056
+    }
+    
+    private struct GameServerFlag {
+        static let login: UInt8 = 0
+        static let logout: UInt8 = 1
+        static let findMatch: UInt8 = 2
+        static let userProfile: UInt8 = 3
+        static let allCards: UInt8 = 4
+        static let catCards: UInt8 = 5
+        static let basicCards: UInt8 = 6
+        static let chanceCards: UInt8 = 7
+        static let abilityCards: UInt8 = 8
+    }
 
-    // MARK: Properties
+    // MARK: - Properties
     
     // whether server is running on a local machine
-    private static let serverIsRunningLocally = true
+    private static let serversAreRunningLocally = true
     
-    private lazy var socket: WebSocket = {
-        let s = WebSocket(url: URL(string: KWNetwork.getBaseURL() + RequestURL.login)!)
-        
-        // set delegates
-        s.delegate = self
-        s.pongDelegate = self
-        
-        // connect
-        s.connect()
-        
-        return s
+    private lazy var client: TCPClient = {
+        let client = TCPClient(address: KWNetwork.getGameServerURL(),
+                               port: GameServerURL.port)
+        return client
     }()
+    
+    private var isConnectedToGameServer = false
     
     static let shared: KWNetwork = {
         let network = KWNetwork()
         return network
     }()
     
-    // MARK: Helper
+    // MARK: - Get Web Server/ Game Server (Base) URL
     
-    private static func getBaseURL() -> String {
-        return KWNetwork.serverIsRunningLocally ? BaseURL.local : BaseURL.remote
+    private static func getWebServerBaseURL() -> String {
+        return KWNetwork.serversAreRunningLocally ? WebServerBaseURL.local : WebServerBaseURL.remote
     }
     
-    // MARK: Initialization
+    private static func getGameServerURL() -> String {
+        return KWNetwork.serversAreRunningLocally ? GameServerURL.local : GameServerURL.remote
+    }
+    
+    // MARK: - Initialization
     
     override init() {
         
     }
     
-    // MARK: Register & Login
+    // MARK: - Webserver Register & Login
     
     func register(username: String, email: String, password: String) {
         // create request
-        var request = URLRequest(url: URL(string: KWNetwork.getBaseURL() + RequestURL.register)!)
-        request.httpMethod = "POST"
+        var request = URLRequest(url: URL(string: KWNetwork.getWebServerBaseURL() + RequestURL.register)!)
+        request.httpMethod = HTTPRequestMethod.post
         
         // json data
         let jsonDictionary = ["username": username, "password": password, "email": email]
@@ -137,7 +165,7 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
                         default:
                             nc.post(name: registerResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: RegisterResult.fail])
+                                    userInfo: [InfoKey.result: RegisterResult.failure])
                         }
                     }
                 } catch let error as NSError {
@@ -149,8 +177,8 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
     
     func login(username: String, password: String) {
         // create request
-        var request = URLRequest(url: URL(string: KWNetwork.getBaseURL() + RequestURL.login)!)
-        request.httpMethod = "POST"
+        var request = URLRequest(url: URL(string: KWNetwork.getWebServerBaseURL() + RequestURL.login)!)
+        request.httpMethod = HTTPRequestMethod.post
         
         // json data
         let jsonDictionary = ["username": username, "password": password]
@@ -179,15 +207,15 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
                         case StatusCode.loginSuccess:
                             nc.post(name: loginResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: LoginResult.success, InfoKey.token: token!])
+                                    userInfo: [InfoKey.result: LoginResult.success, InfoKey.username: username, InfoKey.token: token!])
                         case StatusCode.loginFail:
                             nc.post(name: loginResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: LoginResult.fail])
+                                    userInfo: [InfoKey.result: LoginResult.failure])
                         default:
                             nc.post(name: loginResultNotification,
                                     object: nil,
-                                    userInfo: [InfoKey.result: LoginResult.fail])
+                                    userInfo: [InfoKey.result: LoginResult.failure])
                         }
                     }
                 } catch let error as NSError {
@@ -197,38 +225,148 @@ class KWNetwork: NSObject, WebSocketDelegate, WebSocketPongDelegate {
         }.resume()
     }
     
-    func findGame(token: String) {
-        // if not connected, connect first
-        if !socket.isConnected {
-            socket.connect()
+    // MARK: - Parse Game Server Response
+    
+    enum  BodyType {
+        case int
+        case string
+        case json
+    }
+    
+    private func parseGameServerResponse(response: [UInt8], bodyType: BodyType) -> (flag: UInt8, sizeOfBody: Int, bodyString: String?, bodyInt: Int?) {
+        print("Response: \(response)")
+        
+        // process flag
+        let flag: UInt8 = response[0]
+        print("Response flag: \(flag)")
+            
+        // data size
+        var sizeBytes = response[1...3]
+        sizeBytes = [0, 0, 0, 0, 0] + sizeBytes
+        let data = Data(bytes: sizeBytes)
+        let sizeOfBody = Int(bigEndian: data.withUnsafeBytes { $0.pointee })
+        print("Response body size: \(sizeOfBody)")
+        
+        var bodyString: String? = nil
+        var bodyInt: Int? = nil
+        
+        // TODO: update this
+        // process body
+        switch bodyType {
+        case .int:
+            bodyInt = Int(response[4])
+            print("Response body int: \(bodyInt)")
+        case .string:
+            bodyString = nil
+        default:
+            break
         }
         
-        // TODO: update this to use server API
-        socket.write(string: "Find Game")
+        return (flag, sizeOfBody, bodyString, bodyInt)
     }
     
-    // MARK: WebSocketDelete
+    // MARK: - Game Server
     
-    func websocketDidConnect(socket: WebSocket) {
-        print("Websocket is connected")
+    // flag (1 byte) + token (24 bytes) + sizeOfData (3 bytes)
+    private func getMessagePrefix(flag: UInt8, sizeOfData: Int) -> [UInt8] {
+        var result = [UInt8]()
+        
+        // insert flag at the beginning
+        result.insert(flag, at: 0);
+
+        // append token
+        let token = KWUserDefaults.getToken()
+        result += DSConvertor.stringToBytes(string: token)
+        
+        // append size of data
+        let sizeByteArray = DSConvertor.intToByteArray(number: sizeOfData)
+        result += sizeByteArray.suffix(3)  // last three bytes
+        
+        return result
     }
     
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("Websocket is disconnected: \(error?.localizedDescription)")
+    // return true if connected to the game server, otherwise return false
+    private func connectToGameServer() -> Bool {
+        if isConnectedToGameServer {
+            return true
+        }
+        
+        // create login data
+        let username = KWUserDefaults.getUsername()
+        var bytes = getMessagePrefix(flag: GameServerFlag.login,
+                                     sizeOfData: username.characters.count)
+        bytes += DSConvertor.stringToBytes(string: username)
+        let loginData = Data(bytes: bytes)
+
+        switch client.connect(timeout: 10) {
+        case .success:
+            switch client.send(data: loginData) {
+            case .success:
+                guard let response = client.read(1024 * 10) else {
+                    return false
+                }
+                
+                // parse response
+                let (flag, sizeOfBody, _, bodyInt) =
+                    parseGameServerResponse(response: response, bodyType: .int)
+                
+                // check response
+                if flag == GameServerFlag.login && sizeOfBody == 1 && bodyInt == 1 {  // success
+                    isConnectedToGameServer = true
+                    print("Connection to game server success!")
+                    return true
+                } else {  // failure
+                    isConnectedToGameServer = false
+                    print("Connection to game server failed!")
+                    return false
+                }
+            case .failure (let error):
+                print("Authentication failed, error \(error)")
+            }
+        case .failure (let error):
+            print("Connection to game server failed, error: \(error)")
+            return false
+        }
+        
+        return false
     }
     
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("Got some text: \(text)")
-    }
-    
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
-        print("Got some data: \(data.count)")
-    }
-    
-    // MARK: WebSocketPongDelete
-    
-    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
-        print("Got pong! Maybe some data: \(data?.count)")
+    func findMatch() {
+        if !connectToGameServer() {
+            return
+        }
+        
+        let bytes = getMessagePrefix(flag: GameServerFlag.findMatch,
+                                     sizeOfData: 0)
+        let findMatchData = Data(bytes: bytes)
+        
+        DispatchQueue(label: "Network Queue").async {
+            switch self.client.send(data: findMatchData) {
+            case .success:
+                guard let response = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    // parse response
+                    let (flag, sizeOfBody, _, _) =
+                        self.parseGameServerResponse(response: response, bodyType: .int)
+                    
+                    // check response
+                    if flag == GameServerFlag.findMatch && sizeOfBody == 0 {  // successfully found a match
+                        print("Successfully found a match!")
+                        
+                        let nc = NotificationCenter.default
+                        nc.post(name: findMatchResultNotification,
+                                object: nil,
+                                userInfo: [InfoKey.result: FindMatchResult.success])
+                    }
+
+                }
+            case .failure (let error):
+                print("Send data failed, error: \(error)")
+            }
+        }
     }
     
 }

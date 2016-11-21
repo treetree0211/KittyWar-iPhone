@@ -48,6 +48,10 @@ class KWLoginVC: KWAlertVC {
             case .success:
                 print("Login Success")
                 
+                // save username locally
+                UserDefaults.standard.set(notification.userInfo?[InfoKey.username] as! String,
+                                          forKey: KWUserDefaultsKey.username)
+                
                 // save token locally
                 UserDefaults.standard.set(notification.userInfo?[InfoKey.token] as! String,
                                           forKey: KWUserDefaultsKey.token)
@@ -55,7 +59,7 @@ class KWLoginVC: KWAlertVC {
                 // dismiss the login navigation controller
                 navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 break
-            case .fail:
+            case .failure:
                 // alert fail
                 showAlert(title: "Login Fail",
                           message: "Username or password is wrong")

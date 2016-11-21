@@ -3,4 +3,5 @@ use_frameworks!
 
 target 'KittyWar' do
     pod 'Starscream', '~> 2.0.0'
+    pod 'SwiftSocket'
 end

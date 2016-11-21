@@ -60,7 +60,7 @@ class KWRegisterVC: KWAlertVC {
                 showAlert(title: "Register Success",
                                message: "Register Success")
                 break
-            case .fail:
+            case .failure:
                 showAlert(title: "Register Error",
                                message: "Registore Error")
                 break
