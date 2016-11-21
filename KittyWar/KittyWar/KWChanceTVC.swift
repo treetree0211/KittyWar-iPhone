@@ -1,15 +1,15 @@
 //
-//  KWChanceCardTVC.swift
+//  KWChanceTVC.swift
 //  KittyWar
 //
-//  Created by Janet Zhang on 11/8/16.
+//  Created by Janet Zhang on 11/20/16.
 //  Copyright © 2016 DeiSu. All rights reserved.
 //
 
 import UIKit
 
-class KWChanceCardTVC: UITableViewController {
-
+class KWChanceTVC: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // add background img
@@ -19,7 +19,8 @@ class KWChanceCardTVC: UITableViewController {
     }
     
     
-    var chance = ["Purring", "Guard", "Scratching", "Team up"]
+    var chance = ["Double Purring", "Guaranteed Purring", "Purr and Draw", "Reverse Scratch", "Guard and Heal",
+                  "Guard and Draw", "Can't Reverse", "Can't Guard", "Double Scratch"]
     
     // MARK: -Table view data source
     
@@ -33,7 +34,7 @@ class KWChanceCardTVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChanceCell", for: indexPath)
         
         //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
         //cell.textLabel?.text = content[indexPath.row]
@@ -50,4 +51,5 @@ class KWChanceCardTVC: UITableViewController {
         return "Chance Card Gallery"
     }
 
+  
 }
