@@ -64,9 +64,7 @@ class KWKittyCategoryTVC: UITableViewController {
             }
         }
     }
-    
-    func myVCDidFinish(controller: KWKittyVC, text: String) {
-    }
+
     
 //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        return "Kitty Category"
