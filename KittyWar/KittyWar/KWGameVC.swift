@@ -10,26 +10,19 @@ import UIKit
 
 class KWGameVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var playerCatImageView: UIImageView!
+    @IBOutlet weak var playerCatNameLabel: UILabel!
+    @IBOutlet weak var playerCatAbilityOneLabel: UILabel!
+    @IBOutlet weak var playerCatAbilityTwoLabel: UILabel!
+    @IBOutlet weak var playerCatHPLabel: UILabel!
+    @IBOutlet weak var playerChanceCardCollectionView: UICollectionView!
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    @IBOutlet weak var opponentView: UIView!
+    @IBOutlet weak var opponentCatImageView: UIImageView!
+    @IBOutlet weak var opponentCatNameLabel: UILabel!
+    @IBOutlet weak var opponentCatAbilityOneLabel: UILabel!
+    @IBOutlet weak var opponentCatHPLabel: UILabel!
+    
+    
 }

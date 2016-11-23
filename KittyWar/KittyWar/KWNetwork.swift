@@ -353,7 +353,7 @@ class KWNetwork: NSObject {
                         self.parseGameServerResponse(response: response, bodyType: .int)
                     
                     // check response
-                    if flag == GameServerFlag.findMatch && sizeOfBody == 0 {  // successfully found a match
+                    if flag == GameServerFlag.findMatch && sizeOfBody == 1 {  // successfully found a match
                         print("Successfully found a match!")
                         
                         let nc = NotificationCenter.default
