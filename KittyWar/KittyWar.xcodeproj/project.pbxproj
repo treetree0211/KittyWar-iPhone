@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		309E41111DE2BA240076AB15 /* KWKittyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309E41101DE2BA240076AB15 /* KWKittyVC.swift */; };
+		309E41131DE3993D0076AB15 /* KWChanceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309E41121DE3993D0076AB15 /* KWChanceDetailVC.swift */; };
 		30A8EF921DE25F8E00F6E5D2 /* KWChanceTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EF911DE25F8E00F6E5D2 /* KWChanceTVC.swift */; };
 		30AA55E21DD2715F00E79CB7 /* KWKittyCategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA55E11DD2715F00E79CB7 /* KWKittyCategoryTVC.swift */; };
 		30AA55E41DD2743900E79CB7 /* KWBasicMoveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA55E31DD2743900E79CB7 /* KWBasicMoveTVC.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		309E41101DE2BA240076AB15 /* KWKittyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWKittyVC.swift; sourceTree = "<group>"; };
+		309E41121DE3993D0076AB15 /* KWChanceDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWChanceDetailVC.swift; sourceTree = "<group>"; };
 		30A8EF911DE25F8E00F6E5D2 /* KWChanceTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWChanceTVC.swift; sourceTree = "<group>"; };
 		30AA55E11DD2715F00E79CB7 /* KWKittyCategoryTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWKittyCategoryTVC.swift; sourceTree = "<group>"; };
 		30AA55E31DD2743900E79CB7 /* KWBasicMoveTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWBasicMoveTVC.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				30AA55E31DD2743900E79CB7 /* KWBasicMoveTVC.swift */,
 				30A8EF911DE25F8E00F6E5D2 /* KWChanceTVC.swift */,
 				309E41101DE2BA240076AB15 /* KWKittyVC.swift */,
+				309E41121DE3993D0076AB15 /* KWChanceDetailVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB7B7A771DB58513002529CE /* KWFindMatchVC.swift in Sources */,
+				309E41131DE3993D0076AB15 /* KWChanceDetailVC.swift in Sources */,
 				EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */,
 				309E41111DE2BA240076AB15 /* KWKittyVC.swift in Sources */,
 				EB1111E71DD2674B008200D7 /* DSConvertor.swift in Sources */,

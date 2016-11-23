@@ -18,6 +18,7 @@ class KWChanceTVC: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    var chanceName: String?
     
     var chance = ["Double Purring", "Guaranteed Purring", "Purr and Draw", "Reverse Scratch", "Guard and Heal",
                   "Guard and Draw", "Can't Reverse", "Can't Guard", "Double Scratch"]
@@ -46,6 +47,22 @@ class KWChanceTVC: UITableViewController {
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showChance"{
+            let vc = segue.destination as! KWChanceDetailVC
+            //vc.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPath(for: cell)
+                if let index = indexPath?.row {
+                    chanceName = chance[index]
+                    vc.chanceName = chanceName!
+                    print(chanceName!)
+                }
+            }
+        }
+    }
+
     
     
     
