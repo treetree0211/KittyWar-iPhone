@@ -187,10 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				EBBC746A1DCC55BF00D45173 /* KWAlertVC.swift */,
+				EBF8E5531DE2D14C00551ED6 /* Register & Login */,
 				EB1111E31DD13F6D008200D7 /* KWGameTBC.swift */,
-				EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */,
-				EB7B7A721DB57433002529CE /* KWRegisterVC.swift */,
-				EB7B7A741DB5743E002529CE /* KWLoginVC.swift */,
 				EB7B7A761DB58513002529CE /* KWFindMatchVC.swift */,
 				EB7B7A781DB58527002529CE /* KWProfileTVC.swift */,
 				30AA55E11DD2715F00E79CB7 /* KWKittyCategoryTVC.swift */,
@@ -200,6 +198,16 @@
 				309E41121DE3993D0076AB15 /* KWChanceDetailVC.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EBF8E5531DE2D14C00551ED6 /* Register & Login */ = {
+			isa = PBXGroup;
+			children = (
+				EB7B7A6E1DB5726F002529CE /* KWWelcomeVC.swift */,
+				EB7B7A721DB57433002529CE /* KWRegisterVC.swift */,
+				EB7B7A741DB5743E002529CE /* KWLoginVC.swift */,
+			);
+			name = "Register & Login";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
