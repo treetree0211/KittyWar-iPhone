@@ -30,8 +30,8 @@
 		EBBC746B1DCC55BF00D45173 /* KWAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBC746A1DCC55BF00D45173 /* KWAlertVC.swift */; };
 		EBBC746D1DCC59D300D45173 /* KWUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBC746C1DCC59D300D45173 /* KWUserDefaults.swift */; };
 		EBF8E5551DE5298A00551ED6 /* KWGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E5541DE5298A00551ED6 /* KWGameVC.swift */; };
-		EBF8E5571DE5901F00551ED6 /* KWCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E5561DE5901F00551ED6 /* KWCat.swift */; };
-		EBF8E55A1DE593E000551ED6 /* KWAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E5591DE593E000551ED6 /* KWAbility.swift */; };
+		EBF8E5571DE5901F00551ED6 /* KWCatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E5561DE5901F00551ED6 /* KWCatCard.swift */; };
+		EBF8E55A1DE593E000551ED6 /* KWAbilityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E5591DE593E000551ED6 /* KWAbilityCard.swift */; };
 		EBF8E55C1DE607A900551ED6 /* KWChanceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E55B1DE607A900551ED6 /* KWChanceCard.swift */; };
 		EBF8E55E1DE6082300551ED6 /* KWCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF8E55D1DE6082300551ED6 /* KWCard.swift */; };
 		F29A77464C7E73BB488908BE /* Pods_KittyWar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4620044F9D96FA734CB5010 /* Pods_KittyWar.framework */; };
@@ -87,8 +87,8 @@
 		EBBC746A1DCC55BF00D45173 /* KWAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWAlertVC.swift; sourceTree = "<group>"; };
 		EBBC746C1DCC59D300D45173 /* KWUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWUserDefaults.swift; sourceTree = "<group>"; };
 		EBF8E5541DE5298A00551ED6 /* KWGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWGameVC.swift; sourceTree = "<group>"; };
-		EBF8E5561DE5901F00551ED6 /* KWCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWCat.swift; sourceTree = "<group>"; };
-		EBF8E5591DE593E000551ED6 /* KWAbility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWAbility.swift; sourceTree = "<group>"; };
+		EBF8E5561DE5901F00551ED6 /* KWCatCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWCatCard.swift; sourceTree = "<group>"; };
+		EBF8E5591DE593E000551ED6 /* KWAbilityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWAbilityCard.swift; sourceTree = "<group>"; };
 		EBF8E55B1DE607A900551ED6 /* KWChanceCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWChanceCard.swift; sourceTree = "<group>"; };
 		EBF8E55D1DE6082300551ED6 /* KWCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,8 +226,8 @@
 			isa = PBXGroup;
 			children = (
 				EBF8E55D1DE6082300551ED6 /* KWCard.swift */,
-				EBF8E5561DE5901F00551ED6 /* KWCat.swift */,
-				EBF8E5591DE593E000551ED6 /* KWAbility.swift */,
+				EBF8E5561DE5901F00551ED6 /* KWCatCard.swift */,
+				EBF8E5591DE593E000551ED6 /* KWAbilityCard.swift */,
 				EBF8E55B1DE607A900551ED6 /* KWChanceCard.swift */,
 			);
 			name = Models;
@@ -419,8 +419,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBF8E5571DE5901F00551ED6 /* KWCat.swift in Sources */,
-				EBF8E55A1DE593E000551ED6 /* KWAbility.swift in Sources */,
+				EBF8E5571DE5901F00551ED6 /* KWCatCard.swift in Sources */,
+				EBF8E55A1DE593E000551ED6 /* KWAbilityCard.swift in Sources */,
 				EB7B7A771DB58513002529CE /* KWFindMatchVC.swift in Sources */,
 				309E41131DE3993D0076AB15 /* KWChanceDetailVC.swift in Sources */,
 				EB7B7A6F1DB5726F002529CE /* KWWelcomeVC.swift in Sources */,

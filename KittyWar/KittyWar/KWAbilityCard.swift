@@ -1,5 +1,5 @@
 //
-//  KWAbility.swift
+//  KWAbilityCard.swift
 //  KittyWar
 //
 //  Created by Hejia Su on 11/23/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KWAbility: KWCard {
+class KWAbilityCard: KWCard {
     
     var title: String = ""
     var id: Int = 0

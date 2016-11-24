@@ -1,5 +1,5 @@
 //
-//  KWCat.swift
+//  KWCatCard.swift
 //  KittyWar
 //
 //  Created by Hejia Su on 11/23/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KWCat: KWCard {
+class KWCatCard: KWCard {
     
     var title: String = ""
     var health: Int = 0

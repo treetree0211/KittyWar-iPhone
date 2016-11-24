@@ -25,9 +25,15 @@ enum FindMatchResult {
     case failure
 }
 
+enum SelectCatResult {
+    case success
+    case failure
+}
+
 let registerResultNotification = Notification.Name("registerResultNotification")
 let loginResultNotification = Notification.Name("loginResultNotification")
 let findMatchResultNotification = Notification.Name("findMatchResultNotification")
+let selectCatResultNotification = Notification.Name("selectCatResultNotification")
 
 struct InfoKey {
     static let result = "result"
@@ -83,6 +89,8 @@ class KWNetwork: NSObject {
         static let login: UInt8 = 0
         static let logout: UInt8 = 1
         static let findMatch: UInt8 = 2
+        static let selectCat: UInt8 = 100
+        
         static let userProfile: UInt8 = 3
         static let allCards: UInt8 = 4
         static let catCards: UInt8 = 5
@@ -362,6 +370,44 @@ class KWNetwork: NSObject {
                                 userInfo: [InfoKey.result: FindMatchResult.success])
                     }
 
+                }
+            case .failure (let error):
+                print("Send data failed, error: \(error)")
+            }
+        }
+    }
+    
+    func selectCat(catID: Int) {
+        if !connectToGameServer() {
+            return
+        }
+        
+        var bytes = getMessagePrefix(flag: GameServerFlag.selectCat,
+                                     sizeOfData: 1)
+        bytes.append(UInt8(catID))
+        let selectCatData = Data(bytes: bytes)
+
+        DispatchQueue(label: "Network Queue").async {
+            switch self.client.send(data: selectCatData) {
+            case .success:
+                guard let response = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    // parse response
+                    let (flag, sizeOfBody, _, _) =
+                        self.parseGameServerResponse(response: response, bodyType: .int)
+                    
+                    // check response
+                    if flag == GameServerFlag.selectCat && sizeOfBody == 1 {  // successfully selected a cat
+                        print("Successfully select a cat!")
+                        
+                        let nc = NotificationCenter.default
+                        nc.post(name: selectCatResultNotification,
+                                object: nil,
+                                userInfo: [InfoKey.result: SelectCatResult.success])
+                    }
                 }
             case .failure (let error):
                 print("Send data failed, error: \(error)")
