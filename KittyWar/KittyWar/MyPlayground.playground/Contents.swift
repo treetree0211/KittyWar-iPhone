@@ -2,6 +2,5 @@
 
 import Foundation
 
-let catID: Int = 0
-
-let cat = UInt8(catID)
+let bytes = [0, 0, 0, 1, 2, 2, 2]
+let a = bytes[4...bytes.count-1]

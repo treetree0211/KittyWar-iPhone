@@ -30,15 +30,23 @@ enum SelectCatResult {
     case failure
 }
 
+enum ReadyResult {
+    case success
+    case failure
+}
+
 let registerResultNotification = Notification.Name("registerResultNotification")
 let loginResultNotification = Notification.Name("loginResultNotification")
 let findMatchResultNotification = Notification.Name("findMatchResultNotification")
 let selectCatResultNotification = Notification.Name("selectCatResultNotification")
+let opponentSelectedACatNotification = Notification.Name("opponentSelectedACatNotification")
+let readyNotification = Notification.Name("readyNotification")
 
 struct InfoKey {
     static let result = "result"
     static let token = "token"
     static let username = "username"
+    static let opponentCatID = "opponentCatID"
 }
 
 class KWNetwork: NSObject {
@@ -88,8 +96,12 @@ class KWNetwork: NSObject {
     private struct GameServerFlag {
         static let login: UInt8 = 0
         static let logout: UInt8 = 1
+        
         static let findMatch: UInt8 = 2
+        static let ready: UInt8 = 99
+        static let nextPhase: UInt8 = 98
         static let selectCat: UInt8 = 100
+        static let opponentCat: UInt8 = 49
         
         static let userProfile: UInt8 = 3
         static let allCards: UInt8 = 4
@@ -238,10 +250,11 @@ class KWNetwork: NSObject {
     enum  BodyType {
         case int
         case string
+        case intArray
         case json
     }
     
-    private func parseGameServerResponse(response: [UInt8], bodyType: BodyType) -> (flag: UInt8, sizeOfBody: Int, bodyString: String?, bodyInt: Int?) {
+    private func parseGameServerResponse(response: [UInt8], bodyType: BodyType) -> (flag: UInt8, sizeOfBody: Int, bodyString: String?, bodyInt: Int?, bodyIntArray: [Int]?) {
         print("Response: \(response)")
         
         // process flag
@@ -257,20 +270,31 @@ class KWNetwork: NSObject {
         
         var bodyString: String? = nil
         var bodyInt: Int? = nil
+        var bodyIntArray: [Int]? = nil
         
-        // TODO: update this
         // process body
-        switch bodyType {
-        case .int:
-            bodyInt = Int(response[4])
-            print("Response body int: \(bodyInt)")
-        case .string:
-            bodyString = nil
-        default:
-            break
+        if response.count > 4 {
+            switch bodyType {
+            case .int:
+                bodyInt = Int(response[4])
+                print("Response body int: \(bodyInt!)")
+            case .string:
+                let stringBytes = response[4...response.count - 1]
+                let stringData = Data(bytes: stringBytes)
+                bodyString = String(data: stringData, encoding: String.Encoding.utf8)
+                print("Response body string: \(bodyString!)")
+            case .intArray:
+                bodyIntArray = [Int]()
+                let intArrayBytes = response[4...response.count - 1]
+                for intArrayByte in intArrayBytes {
+                    bodyIntArray!.append(Int(intArrayByte))
+                }
+            default:
+                break
+            }
         }
         
-        return (flag, sizeOfBody, bodyString, bodyInt)
+        return (flag, sizeOfBody, bodyString, bodyInt, bodyIntArray)
     }
     
     // MARK: - Game Server
@@ -315,7 +339,7 @@ class KWNetwork: NSObject {
                 }
                 
                 // parse response
-                let (flag, sizeOfBody, _, bodyInt) =
+                let (flag, sizeOfBody, _, bodyInt, _) =
                     parseGameServerResponse(response: response, bodyType: .int)
                 
                 // check response
@@ -357,7 +381,7 @@ class KWNetwork: NSObject {
                 
                 DispatchQueue.main.async {
                     // parse response
-                    let (flag, sizeOfBody, _, _) =
+                    let (flag, sizeOfBody, _, _, _) =
                         self.parseGameServerResponse(response: response, bodyType: .int)
                     
                     // check response
@@ -377,6 +401,107 @@ class KWNetwork: NSObject {
         }
     }
     
+    func sendReadyMessageToGameServer() {
+        if !connectToGameServer() {
+            return
+        }
+
+        let bytes = getMessagePrefix(flag: GameServerFlag.ready,
+                                     sizeOfData: 0)
+        let readyData = Data(bytes: bytes)
+
+        DispatchQueue(label: "Network Queue").async {
+            switch self.client.send(data: readyData) {
+            case .success:
+                guard let response = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    // parse response
+                    let (flag, sizeOfBody, _, _, _) =
+                        self.parseGameServerResponse(response: response, bodyType: .int)
+                    
+                    // check response
+                    if flag == GameServerFlag.nextPhase && sizeOfBody == 0 {
+                        print("Ready confirmed!")
+                        
+                        let nc = NotificationCenter.default
+                        nc.post(name: readyNotification,
+                                object: nil,
+                                userInfo: [InfoKey.result: ReadyResult.success])
+                    }
+                }
+            case .failure (let error):
+                print("Send data failed, error: \(error)")
+            }
+        }
+    }
+    
+    func sendReadyForCatSelectionMessageToGameServer() {
+        if !connectToGameServer() {
+            return
+        }
+        
+        let bytes = getMessagePrefix(flag: GameServerFlag.ready,
+                                     sizeOfData: 0)
+        let readyData = Data(bytes: bytes)
+        
+        DispatchQueue(label: "Network Queue").async {
+            switch self.client.send(data: readyData) {
+            case .success:
+                // ready
+                guard let readyResponse = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                let (readyResponseFlag, readyResponseSize, _, _, _) =
+                    self.parseGameServerResponse(response: readyResponse, bodyType: .int)
+                
+                // opponent cat id
+                guard let opponentCatResponse = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                let (opponentCatResponseFlag, opponentCatSize, _, opponentCatID, _) =
+                    self.parseGameServerResponse(response: opponentCatResponse, bodyType: .int)
+
+                // random ability
+                guard let randomAbilityResponse = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                let (randomAbilityFlag, randomAbilitySize, _, randomAbilityID, _) =
+                    self.parseGameServerResponse(response: opponentCatResponse, bodyType: .int)
+                
+                // chance cards
+                guard let chanceCardsResponse = self.client.read(1024 * 10) else {
+                    return
+                }
+                
+                let (chanceCardFlag, chanceCardSize, _, _, chanceCards) =
+                    self.parseGameServerResponse(response: chanceCardsResponse, bodyType: .int)
+
+                DispatchQueue.main.async {
+                    
+                    
+                    
+                    // check response
+//                    if flag == GameServerFlag.nextPhase && sizeOfBody == 0 {
+//                        print("Ready confirmed!")
+//                        
+//                        let nc = NotificationCenter.default
+//                        nc.post(name: readyNotification,
+//                                object: nil,
+//                                userInfo: [InfoKey.result: ReadyResult.success])
+//                    }
+                }
+            case .failure (let error):
+                print("Send data failed, error: \(error)")
+            }
+        }
+    }
+    
     func selectCat(catID: Int) {
         if !connectToGameServer() {
             return
@@ -384,7 +509,8 @@ class KWNetwork: NSObject {
         
         var bytes = getMessagePrefix(flag: GameServerFlag.selectCat,
                                      sizeOfData: 1)
-        bytes.append(UInt8(catID))
+        bytes += DSConvertor.stringToBytes(string: "\(catID)")
+        // bytes.append(UInt8(catID))
         let selectCatData = Data(bytes: bytes)
 
         DispatchQueue(label: "Network Queue").async {
@@ -396,7 +522,7 @@ class KWNetwork: NSObject {
                 
                 DispatchQueue.main.async {
                     // parse response
-                    let (flag, sizeOfBody, _, _) =
+                    let (flag, sizeOfBody, _, _, _) =
                         self.parseGameServerResponse(response: response, bodyType: .int)
                     
                     // check response
@@ -411,6 +537,31 @@ class KWNetwork: NSObject {
                 }
             case .failure (let error):
                 print("Send data failed, error: \(error)")
+            }
+        }
+    }
+    
+    func getOpponentCatID() {
+        DispatchQueue(label: "Network Queue").async {
+            guard let response = self.client.read(1024 * 10) else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                // parse response
+                let (flag, sizeOfBody, bodyString, _, _) =
+                    self.parseGameServerResponse(response: response, bodyType: .string)
+                
+                // check response
+                if flag == GameServerFlag.opponentCat && sizeOfBody == 1 && bodyString != nil {  // successfully get opponent cat
+                    let opponentCatID = Int(bodyString!)
+                    print("Successfully get opponent cat, cat id: \(opponentCatID)!")
+                    
+                    let nc = NotificationCenter.default
+                    nc.post(name: opponentSelectedACatNotification,
+                            object: nil,
+                            userInfo: [InfoKey.opponentCatID: opponentCatID])
+                }
             }
         }
     }

@@ -52,6 +52,9 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
     var playerCat: KWCatCard? = nil
     var playerCatHP: Int = 0
     
+    var opponentCat: KWCatCard? = nil
+    var opponentCatHP: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,7 +98,10 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
         availableCats.append(ragdollCat)
     }
     
+    // 1. next phase response (98) 2. opponent cat id(49) 3. random ability 4. chance cards
     @IBAction func fight(_ sender: UIButton) {
+        print("Selected cat id: \(selectedCatID!)")
+        
         if selectedCatID == nil {
             return
         }
@@ -107,7 +113,6 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
                        name: selectCatResultNotification,
                        object: nil)
 
-        
         KWNetwork.shared.selectCat(catID: selectedCatID!)
     }
     
@@ -117,15 +122,16 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
             case .success:
                 // get cat
                 playerCat = availableCats[selectedCatID!]
+
+                // register to notification center
+                let nc = NotificationCenter.default
+                nc.addObserver(self,
+                               selector: #selector(KWGameVC.handleReadyForCatSelection(notification:)),
+                               name: selectCatResultNotification,
+                               object: nil)
                 
-                // wait for next response
-                
-                // hide cat picking table view & show game views
-//                catPickingTableView.isHidden = true
-//                playerView.isHidden = false
-//                opponentView.isHidden = false
-                
-                // setup UI
+                // send ready for cat selection
+                KWNetwork.shared.sendReadyForCatSelectionMessageToGameServer()
                 break
             case .failure:
                 // alert fail
@@ -134,6 +140,24 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
                 break
             }
         }
+    }
+    
+    func handleReadyForCatSelection(notification: Notification) {
+        if let opponentCatID = notification.userInfo?[InfoKey.opponentCatID] as? Int {
+            opponentCat = availableCats[opponentCatID]
+            opponentCatHP = opponentCat!.health
+
+            // hide cat picking table view & show game views
+            catPickingTableView.isHidden = true
+            playerView.isHidden = false
+            opponentView.isHidden = false
+            
+            // setup views
+            opponentCatImageView.image = UIImage(named: opponentCat!.title)
+            opponentCatNameLabel.text = opponentCat!.title
+            opponentCatHPLabel.text = "HP: \(opponentCatHP)"
+        }
+
     }
     
     @IBAction func basicMoveButtenPressed(_ sender: UIButton) {
@@ -176,7 +200,7 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
     
     private var selectedCatID: Int? = nil
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         if tableView == catPickingTableView {
             let catCard = availableCats[indexPath.row]
             selectedCatID = catCard.catID
@@ -189,7 +213,6 @@ class KWGameVC: KWAlertVC, UICollectionViewDataSource, UICollectionViewDelegate,
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
     }
-    
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return UICollectionViewCell()
